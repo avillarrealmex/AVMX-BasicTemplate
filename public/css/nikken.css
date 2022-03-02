@@ -1,0 +1,73 @@
+/********** NOTE Inicia configuración general del sitio **********/
+/* Posicionamiento logo */
+.logoNikken {
+    width: 60%;
+    opacity: 0.9;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+}
+
+/* Configuración del contenido */
+.body-background {
+    background-image: url("/images/rama_hojas.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vw 100vh;
+    object-fit: contain;
+}
+/********** Finaliza configuración general del sitio **********/
+/********** NOTE Inicia configuración sidebar **********/
+
+/*Fondo sidebar*/
+.bg-sidebar {
+    height: 100vh;
+    display: block;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.bg-sidebar::before {
+    content: "";
+    background: url("/images/fondo_hojas.png");
+    opacity: 0.08;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-color: #2be974;
+}
+
+#sidebarMenu {
+    position: fixed;
+    height: 100%;
+
+}
+/********** Finaliza configuración sidebar **********/
+/*NOTE Inicia configuración footer */
+/* configuración del footer */
+.footer {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0px;
+    position: fixed;
+    background-color: #2be974;
+}
+
+.footer::before {
+    content: "";
+    left: 15rem;
+    bottom: 100px;
+    /* opacity: 0.09; */
+    background-color: #2be974;
+}
+
+.content{
+    padding-bottom: 30px;
+}
