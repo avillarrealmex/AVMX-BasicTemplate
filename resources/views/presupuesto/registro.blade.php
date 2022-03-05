@@ -62,10 +62,94 @@
                            <button type="button" class="btn btn-danger">Eliminar</button>
                        </td>
                    </tr>
+                   <tr>
+                       <td class="buscador_usuario">JUAN</td>
+                       <td class="buscador_a_presupuesto">RIQUELME</td>
+                       <td class="buscador_c_global">T</td>
+                       <td class="buscador_c_especifico">T</td>
+                       <td class="importe">T</td>
+                       <td class="status">D</td>
+                       <td>
+                          <button type="button" class="btn btn-warning">Modificar</button>
+                          <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">ROBERTO</td>
+                       <td class="buscador_a_presupuesto">ANDRADE</td>
+                       <td class="buscador_c_global">D</td>
+                       <td class="buscador_c_especifico">D</td>
+                       <td class="importe">D</td>
+                       <td class="status">T</td>
+                       <td>
+                           <button type="button" class="btn btn-warning">Modificar</button>
+                           <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">TOMAS</td>
+                       <td class="buscador_a_presupuesto">RIQUELME</td>
+                       <td class="buscador_c_global">D</td>
+                       <td class="buscador_c_especifico">D</td>
+                       <td class="importe">D</td>
+                       <td class="status">T</td>
+                       <td>
+                           <button type="button" class="btn btn-warning">Modificar</button>
+                           <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">JUAN</td>
+                       <td class="buscador_a_presupuesto">RIQUELME</td>
+                       <td class="buscador_c_global">T</td>
+                       <td class="buscador_c_especifico">T</td>
+                       <td class="importe">T</td>
+                       <td class="status">D</td>
+                       <td>
+                          <button type="button" class="btn btn-warning">Modificar</button>
+                          <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">ROBERTO</td>
+                       <td class="buscador_a_presupuesto">ANDRADE</td>
+                       <td class="buscador_c_global">D</td>
+                       <td class="buscador_c_especifico">D</td>
+                       <td class="importe">D</td>
+                       <td class="status">T</td>
+                       <td>
+                           <button type="button" class="btn btn-warning">Modificar</button>
+                           <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">TOMAS</td>
+                       <td class="buscador_a_presupuesto">RIQUELME</td>
+                       <td class="buscador_c_global">D</td>
+                       <td class="buscador_c_especifico">D</td>
+                       <td class="importe">D</td>
+                       <td class="status">T</td>
+                       <td>
+                           <button type="button" class="btn btn-warning">Modificar</button>
+                           <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td class="buscador_usuario">TOMAS</td>
+                       <td class="buscador_a_presupuesto">RIQUELME</td>
+                       <td class="buscador_c_global">D</td>
+                       <td class="buscador_c_especifico">D</td>
+                       <td class="importe">D</td>
+                       <td class="status">T</td>
+                       <td>
+                           <button type="button" class="btn btn-warning">Modificar</button>
+                           <button type="button" class="btn btn-danger">Eliminar</button>
+                       </td>
+                   </tr>
                 </tbody>
                 <tfoot class=paginador>
                     <td colspan="1">
-                        Mostrando 1 to 3 de 3 registros
+                        Mostrando 1 to 10 de 30 registros
                     </td>
                     <td colspan="6">
                         <div class="left">

@@ -33,7 +33,7 @@
             {{-- Finaliza sección sidebar --}}
             {{--NOTE Inicia sección del content-body --}}
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content">
+                <div class="content body-background">
                     @yield('content')
                 </div>
             </main>

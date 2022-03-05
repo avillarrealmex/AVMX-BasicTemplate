@@ -1,4 +1,4 @@
-<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">
     <img src="{{ asset('images/logo_nikken.png')}}" class="img-center logoNikken" alt="Responsive image"/>
 </a>
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">

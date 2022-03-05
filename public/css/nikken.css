@@ -1,11 +1,11 @@
-/********** NOTE Inicia configuración general del sitio **********/
+/**********SECTION Inicia configuración general del sitio **********/
 /* Posicionamiento logo */
 .logoNikken {
     width: 60%;
     opacity: 0.9;
     align-items: center !important;
     justify-content: center !important;
-    text-align: center;
+    text-align: center !important;
 }
 
 /* Configuración del contenido */
@@ -16,10 +16,48 @@
     background-size: 100vw 100vh;
     object-fit: contain;
 }
-/********** Finaliza configuración general del sitio **********/
-/********** NOTE Inicia configuración sidebar **********/
 
-/*Fondo sidebar*/
+/**********!SECTION Finaliza configuración general del sitio **********/
+/**********SECTION Inicia configuración login **********/
+.background {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: url("/images/fondo_hojas.png");
+    opacity: 0.09;
+    background-color: #2be974;
+}
+
+/*NOTE Centrado del login */
+.login-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.fondo-logo-sombra {
+    padding: 10px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    box-shadow: 10px 10px 3px #767879;
+    -webkit-box-shadow: 10px 10px 3px #767879;
+    -moz-box-shadow: 10px 10px 3px #767879;
+}
+
+/**********!SECTION Finaliza configuración login **********/
+/**********SECTION Inicia configuración sidebar **********/
+/*NOTE Fondo sidebar*/
 .bg-sidebar {
     height: 100vh;
     display: block;
@@ -46,9 +84,53 @@
     height: 100%;
 
 }
-/********** Finaliza configuración sidebar **********/
-/*NOTE Inicia configuración footer */
-/* configuración del footer */
+
+/*NOTE Diseño del menú */
+.sidebar {
+    text-align: center;
+}
+
+.sidebar lu {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    list-style-type: none;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    display: inline;
+    border: 1px solid#2be974;
+}
+
+.sidebar li a {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+}
+
+.navbar li a:hover {
+    color: #000;
+    background-color: #2be974;
+
+}
+
+/* nav li ul {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 120px;
+}
+
+nav li:hover ul {
+    display: block;
+} */
+
+/**********!SECTION Finaliza configuración sidebar **********/
+/**********SECTION Inicia configuración footer **********/
 .footer {
     height: 30px;
     width: 100%;
@@ -68,6 +150,10 @@
     background-color: #2be974;
 }
 
-.content{
+/**********!SECTION Finaliza configuración footer **********/
+/**********SECTION Finaliza configuración content-body **********/
+.content {
     padding-bottom: 30px;
 }
+
+/**********!SECTION Finaliza configuración content-body **********/

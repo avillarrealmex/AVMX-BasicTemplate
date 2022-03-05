@@ -62,7 +62,7 @@ class TestRemembermeController extends Controller
              if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']]))
              {
                 Session::put('user_session', $input['email']);
-                return redirect('/user-dashboard');
+                return redirect('/');
              }
              else
              {
