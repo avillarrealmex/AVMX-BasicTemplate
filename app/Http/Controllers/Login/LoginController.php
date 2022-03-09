@@ -37,7 +37,7 @@ class LoginController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'code' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
 
@@ -53,10 +53,10 @@ class LoginController extends Controller
     {
         $input = $request->all();
         $this->validate($request, [
-            'code' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ], [
-            'code.required' => 'Código de usuario es requerido',
+            'email.required' => 'Código de usuario es requerido',
             'password.required' => 'Contraseña es requerida',
 
         ]);
@@ -68,8 +68,8 @@ class LoginController extends Controller
             setcookie('login_email', $request->email, time() + 60 * 60 * 24 * 100);
             setcookie('login_pass', $request->password, time() + 60 * 60 * 24 * 100);
         }
-        if (Auth::attempt(['code' => $input['code'], 'password' => $input['password']])) {
-            Session::put('user_session', $input['code']);
+        if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
+            Session::put('user_session', $input['email']);
             return redirect('/');
         } else {
             return redirect()->route('user.login');

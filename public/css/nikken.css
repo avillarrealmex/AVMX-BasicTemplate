@@ -15,6 +15,13 @@
     background-position: center;
     background-size: 100vw 100vh;
     object-fit: contain;
+    padding: 0px;
+}
+
+.mt-4 {
+    color: #2be974;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
 }
 
 /**********!SECTION Finaliza configuración general del sitio **********/
@@ -87,37 +94,54 @@
 
 /*NOTE Diseño del menú */
 .sidebar {
-    text-align: center;
+    text-align: left;
 }
 
 .sidebar lu {
     display: inline-block;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
 }
 
-.sidebar li {
+.sidebar-header {
+    cursor: pointer;
     list-style-type: none;
-    width: 100%;
-    align-items: center;
-    align-content: center;
+    width: 100% !important;
     display: inline;
+    text-align: left;
+    padding: 5px 5px 5px 8px;
     border: 1px solid#2be974;
+    border-radius: 5px;
+    background: #7ce8a5;
+    opacity: 0.6;
+}
+
+.sidebar-submenu {
+    cursor: pointer;
+    list-style-type: none;
+    width: 100% !important;
+    display: inline-block;
+    text-align: left;
+    padding: 5px 5px 5px 8px;
+    border: 1px solid#2be974;
+    border-radius: 5px;
+    background: #9fe6ba;
+    opacity: 0.5;
+    box-sizing: border-box;
 }
 
 .sidebar li a {
     text-decoration: none;
-    display: inline-block;
-    width: 100%;
-    height: 30px;
+    width: 100% !important;
 }
 
+/**********!SECTION Finaliza configuración sidebar **********/
+/**********SECTION Inicia configuración navbar **********/
 .navbar li a:hover {
     color: #000;
     background-color: #2be974;
 
 }
-
 /* nav li ul {
     display: none;
     position: absolute;
@@ -129,7 +153,7 @@ nav li:hover ul {
     display: block;
 } */
 
-/**********!SECTION Finaliza configuración sidebar **********/
+/**********!SECTION Finaliza configuración navbar **********/
 /**********SECTION Inicia configuración footer **********/
 .footer {
     height: 30px;
@@ -153,7 +177,10 @@ nav li:hover ul {
 /**********!SECTION Finaliza configuración footer **********/
 /**********SECTION Finaliza configuración content-body **********/
 .content {
-    padding-bottom: 30px;
+    padding-bottom: 300px;
+    width: 100%;
+    height: 100vh;
 }
 
 /**********!SECTION Finaliza configuración content-body **********/
+

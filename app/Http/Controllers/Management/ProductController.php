@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 
-class ProviderController extends Controller
+class ProductController extends Controller
 {
     /**
      * Sección de vistas
      */
 
-    public function viewProviderTable() {
-        return view('management.provider');
+    public function viewProductTable() {
+        return view('management.product');
     }
 
     /**

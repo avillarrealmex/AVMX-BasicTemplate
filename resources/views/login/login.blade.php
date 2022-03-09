@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login')
 @section('content')
     <div class="container py-5">
         <div class="row d-flex justify-content-center align-items-center">
@@ -25,7 +25,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="useremail">Código de usuario <span class="text-danger">*</span></label>
-                                <input type="email" name="email" value="{{$login_email}}"  class="form-control">
+                                <input type="text" name="email" value="{{$login_email}}"  class="form-control">
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif

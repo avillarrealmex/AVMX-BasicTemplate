@@ -10,11 +10,11 @@
     <!--NOTE Importamos los Scripts JS -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/nikken.js') }}" defer></script>
-    {{-- <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script> --}}
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script>
     <!--NOTE Importamos Styles CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nikken.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 </head>
 <body>
     {{--NOTE Inicia sección del navbar --}}
