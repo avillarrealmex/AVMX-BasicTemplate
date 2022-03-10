@@ -12,6 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     protected $connection= 'sqlsrv';
     protected $table = 'users';
+    protected $dateFormat = 'Ymd H:i:s.v';
 
     protected $fillable = [
         'name',
