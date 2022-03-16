@@ -8,7 +8,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'test') }}</title>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/nikken.js') }}"></script>
+        <script src="{{ asset('js/qrcode.min.js') }}"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/nikken.css') }}" rel="stylesheet">

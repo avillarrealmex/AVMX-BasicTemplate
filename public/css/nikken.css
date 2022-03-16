@@ -142,6 +142,7 @@
     background-color: #2be974;
 
 }
+
 /* nav li ul {
     display: none;
     position: absolute;
@@ -175,7 +176,7 @@ nav li:hover ul {
 }
 
 /**********!SECTION Finaliza configuración footer **********/
-/**********SECTION Finaliza configuración content-body **********/
+/**********SECTION Inicia configuración content-body **********/
 .content {
     padding-bottom: 300px;
     width: 100%;
@@ -183,4 +184,144 @@ nav li:hover ul {
 }
 
 /**********!SECTION Finaliza configuración content-body **********/
+
+/**********SECTION Inicia diseño tablas editables **********/
+
+.table {
+    border: #295505 rounded;
+}
+
+thead tr th{
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: rgb(255, 255, 255);
+    background: rgb(255, 255, 255, 0.5);
+    height: 100%;
+}
+
+.table-responsive {
+    height:100% !important;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
+.table thead th{
+    vertical-align:middle;
+    padding: 5px, 5px;
+    font-size: 25px;
+    text-transform: uppercase;
+    vertical-align: top;
+    color: #1D4A5A;
+    font-weight: normal;
+    text-align: left;
+    background: rgb(124, 232, 165);
+    background: rgb(124, 232, 165, 0.3);
+}
+
+tr:first-child {
+    color: #295505;
+}
+
+td:hover {
+    color: #4a9d06;
+    font-weight: bold;
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: line;
+}
+
+
+
+.table tbody tr td {
+    vertical-align:middle;
+    padding: 5px;
+    background: #f2f2f2 transparent;
+    font-size: 14px;
+}
+
+.add {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.edit {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.save {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.delete {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.edit {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.save {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.add {
+    float: right;
+    background: transparent;
+    border: 1px solid black;
+    color: black;
+    font-size: 13px;
+    padding: 0;
+    padding: 3px 5px;
+    cursor: pointer;
+}
+
+.add :hover {
+    background: #ffffff;
+    color: #00adee;
+}
+
+.save {
+    display: none;
+    background: #32AD60;
+    color: #ffffff;
+}
+.save :hover {
+    background: darken(#32AD60, 10%);
+}
+
+.edit {
+    background: #2199e8;
+    color: #ffffff;
+
+}
+
+.edit :hover {
+    background: darken(#2199e8, 10%);
+}
+.delete {
+    background: #EC5840;
+    color: #ffffff;
+
+}
+
+.delete :hover {
+    background: darken(#EC5840, 10%);
+}
+/**********!SECTION Finaliza diseño tablas editables **********/
 

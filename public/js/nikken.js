@@ -86,62 +86,30 @@ function ajaxRequest(method, url, data, dateType) {
     return ajaxResponse;
 }
 
-$(document).ready(function () {
-    // Setup - add a text input to each footer cell
-    $('#example thead tr')
-        .clone(true)
-        .addClass('filters')
-        .appendTo('#example thead');
-
-    var table = $('#example').DataTable({
-        orderCellsTop: true,
-        fixedHeader: true,
-        initComplete: function () {
-            var api = this.api();
-
-            // For each column
-            api
-                .columns()
-                .eq(0)
-                .each(function (colIdx) {
-                    // Set the header cell to contain the input element
-                    var cell = $('.filters th').eq(
-                        $(api.column(colIdx).header()).index()
-                    );
-                    var title = $(cell).text();
-                    $(cell).html('<input type="text" placeholder="' + title + '" />');
-
-                    // On every keypress in this input
-                    $(
-                        'input',
-                        $('.filters th').eq($(api.column(colIdx).header()).index())
-                    )
-                        .off('keyup change')
-                        .on('keyup change', function (e) {
-                            e.stopPropagation();
-
-                            // Get the search value
-                            $(this).attr('title', $(this).val());
-                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
-
-                            var cursorPosition = this.selectionStart;
-                            // Search the column for that value
-                            api
-                                .column(colIdx)
-                                .search(
-                                    this.value != ''
-                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
-                                        : '',
-                                    this.value != '',
-                                    this.value == ''
-                                )
-                                .draw();
-
-                            $(this)
-                                .focus()[0]
-                                .setSelectionRange(cursorPosition, cursorPosition);
-                        });
-                });
-        },
+$(document).on('click', '.edit', function() {
+    $(this).parent().siblings('td.data').each(function() {
+      var content = $(this).html();
+      $(this).html('<input value="' + content + '" />');
     });
-});
+    $(this).siblings('.save').show();
+    $(this).siblings('.delete').hide();
+    $(this).hide();
+  });
+  $(document).on('click', '.save', function() {
+    $('input').each(function() {
+      var content = $(this).val();
+      $(this).html(content);
+      $(this).contents().unwrap();
+    });
+    $(this).siblings('.edit').show();
+    $(this).siblings('.delete').show();
+    $(this).hide();
+  });
+  $(document).on('click', '.delete', function() {
+    $(this).parents('tr').remove();
+  });
+  $('.add').click(function() {
+    $(this).parents('table').append('<tr><td class="data"></td><td class="data"></td><td class="data"></td><td><button class="save">Save</button><button class="edit">Edit</button> <button class="delete">Delete</button></td></tr>');
+  });
+
+

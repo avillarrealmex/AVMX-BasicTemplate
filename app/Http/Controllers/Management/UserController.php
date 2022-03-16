@@ -14,8 +14,14 @@ class UserController extends Controller
      * Sección de vistas
      */
 
-    public function viewUserTable() {
-        return view('management.users.table');
+    public function viewUserTable(Request $request) {
+        try {
+            $users = $this->listAll($request);
+            return view('management.users.table', ['users' => $users]);
+        } catch (\Throwable $th) {
+            return view('layouts.errors.500', ['message' => $th->getMessage()]);
+        }
+
     }
 
     public function viewUserFormCreate() {
@@ -71,29 +77,45 @@ class UserController extends Controller
     }
 
     public function listAll(Request $request) {
+        //DB::enableQueryLog(); //Se ocupa para debug de la consulta
         //Forma 1 Objeto simplificado
-        $users = User::select(['name, email']);
+        $query = User::select('id', 'name', 'email', 'created_at')
+            ->selectRaw("IIF(isActive = 1, 'Activo', 'Inactivo') AS isActive");
         if ($request->has('find')) {
-            $users->where('name', 'like', '%'.$request->find.'%');
+            $query->where('name', 'like', '%'.$request->find.'%');
         }
-        $users->get();
+        $users = $query->get();
 
-            //Forma 2 Sql nativo
-            /* $users = DB::connection('sqlsrv')
-                ->select('SELECT * FROM users'); */
+        //Forma 2 Sql nativo
+        /* if ($request->has('find')) {
 
-            //Forma 3 Eloquent
-            /* $users = DB::connection('sqlsrv')
-                ->table('users')
-                ->select(['name, email'])
-                ->get(); */
+            $users = DB::connection('sqlsrv')->select("SELECT id, name, email, created_at FROM users WHERE name LIKE '%?%'", $request->find);
+        } else {
+            $users = DB::connection('sqlsrv')->select('SELECT id, name, email, created_at FROM users');
+        } */
 
-            //Forma 4 Objeto
-            /* $users = new User;
-            $users->select(['name, email']);
-            $users->get(); */
+        //Forma 3 Eloquent
+        /* $query = DB::connection('sqlsrv')
+            ->table('users')
+            ->select(['id', 'name', 'email', 'created_at']);
+        if ($request->has('find')) {
+            $query->where('name', 'like', '%'.$request->find.'%');
+        }
+        $users = $query->get(); */
 
+        //Forma 4 Objeto
+        /* $query = new User;
+        $query->select(['id', 'name', 'email', 'created_at']);
+        if ($request->has('find')) {
+            $query->where('name', 'like', '%'.$request->find.'%');
+        }
+        $users = $query->get(); */
+
+        //dd(DB::getQueryLog()); //Se ocupa para debug de la consulta
         return $users;
+        /* return response()->json([
+
+        ]); */
     }
 
     public function listOne(Request $request) {
