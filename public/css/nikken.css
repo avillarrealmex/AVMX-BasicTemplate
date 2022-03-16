@@ -191,13 +191,10 @@ nav li:hover ul {
     border: #295505 rounded;
 }
 
-thead tr th{
+thead th{
     position: sticky !important;
-    top: 0;
-    z-index: 100;
-    background: rgb(255, 255, 255);
-    background: rgb(255, 255, 255, 0.5);
-    height: 100%;
+    top: 66px;
+    z-index: 1020;
 }
 
 .table-responsive {
@@ -216,7 +213,6 @@ thead tr th{
     font-weight: normal;
     text-align: left;
     background: rgb(124, 232, 165);
-    background: rgb(124, 232, 165, 0.3);
 }
 
 tr:first-child {

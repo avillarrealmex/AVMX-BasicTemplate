@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="table-responsive">
-        <table class="table data table-bordered table-striped">
+    <div class="content-fluid">
+        <table class="table data table-bordered table-responsive">
             <h4> Encabezado de la tabla </h4>
             <thead>
                 <tr>
-                    <th scope="col"> Nombre </th>
+                    <th scope="col"> Usuario </th>
                     <th scope="col"> email </th>
                     <th scope="col"> Creado en </th>
                     <th scope="col"> Status </th>
