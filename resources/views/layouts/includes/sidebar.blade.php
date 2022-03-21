@@ -1,4 +1,4 @@
-<div class="sidebar-menu">
+<div class="sidebar-menu sidebarToggle">
     <ul class="list-unstyled ps-0 components nav">
         <li class="sidebar-header" data-bs-toggle="collapse" data-bs-target="#gestion-collapse" aria-expanded="false">
             <i class="fa-solid fa-list-check"></i> Catálogos

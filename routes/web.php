@@ -24,7 +24,6 @@ Route::get('/user-register',[LoginController::class,'viewRegisterForm'])->name('
 Route::get('/login',[LoginController::class,'viewLoginForm'])->name('user.login');
 Route::post('/post-registration',[LoginController::class,'postRegistration'])->name('post.register');
 Route::post('/check-login',[LoginController::class,'checklogin'])->name('post.login');
-Route::post('/management/user/listAll',[UserController::class,'listAll']);
 #Links QrCode
 Route::group(['prefix'=>'qrCode'], function() {
     Route::get('/index',[QrCodeController::class,'viewGenerateQrCode'])->name('qrCode.generate');
@@ -39,7 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     #Links de gestión
     Route::group(['prefix'=>'management/user'], function() {
-        Route::get('/index',[UserController::class,'viewUserTable'])->name('user.table');
+        Route::match(['get','post'], '/index',[UserController::class,'viewUserTable'])->name('user.table');
         Route::get('/create',[UserController::class,'viewUserFormCreate'])->name('user.formCreate');
         Route::post('/create',[UserController::class,'create'])->name('user.create');
     });

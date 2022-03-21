@@ -13,13 +13,29 @@ class UserController extends Controller
     /**
      * Sección de vistas
      */
-
     public function viewUserTable(Request $request) {
         try {
-            $users = $this->listAll($request);
-            return view('management.users.table', ['users' => $users]);
+            $objectUsers = $this->listAll($request);
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'users' => $objectUsers->users,
+                    'tittleColumns' => $objectUsers->tittleColumns,
+                    'tittleHeaders' => $objectUsers->tittleHeaders,
+                ]);
+            } else {
+                return view('management.users.table', [
+                    'users' => $objectUsers->users,
+                    'tittleColumn' => $objectUsers->tittleColumns,
+                    'tittleHeaders' => $objectUsers->tittleHeaders,
+                ]);
+            }
         } catch (\Throwable $th) {
-            return view('layouts.errors.500', ['message' => $th->getMessage()]);
+            if ($request->ajax()) {
+                dd($th->getMessage());
+            } else {
+                return view('layouts.errors.500', ['message' => $th->getMessage()]);
+            }
         }
 
     }
@@ -77,12 +93,23 @@ class UserController extends Controller
     }
 
     public function listAll(Request $request) {
+        $tittleColumns = array('Usuario','email','Creado el', 'status');
+        $tittleHeaders = array('name', 'email', 'created_at', 'isActive');
         //DB::enableQueryLog(); //Se ocupa para debug de la consulta
         //Forma 1 Objeto simplificado
         $query = User::select('id', 'name', 'email', 'created_at')
             ->selectRaw("IIF(isActive = 1, 'Activo', 'Inactivo') AS isActive");
-        if ($request->has('find')) {
-            $query->where('name', 'like', '%'.$request->find.'%');
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%'.$request->name.'%');
+        }
+        if ($request->has('email')) {
+            $query->where('email', 'like', '%'.$request->email.'%');
+        }
+        if ($request->has('created_at')) {
+            $query->where('created_at', '=', $request->created_at);
+        }
+        if ($request->has('isActive')) {
+            $query->where('isActive', '=', $request->isActive);
         }
         $users = $query->get();
 
@@ -112,10 +139,13 @@ class UserController extends Controller
         $users = $query->get(); */
 
         //dd(DB::getQueryLog()); //Se ocupa para debug de la consulta
-        return $users;
-        /* return response()->json([
 
-        ]); */
+        $objectUsers = new \stdClass();
+        $objectUsers->users = $users;
+        $objectUsers->tittleColumns = $tittleColumns;
+        $objectUsers->tittleHeaders = $tittleHeaders;
+
+        return $objectUsers;
     }
 
     public function listOne(Request $request) {

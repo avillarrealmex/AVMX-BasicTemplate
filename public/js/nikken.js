@@ -1,3 +1,5 @@
+/**SECTION Inicia sección de funciones generales */
+//NOTE Función Toogle Button
 window.addEventListener('DOMContentLoaded', event => {
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('.sidebarToggle');
@@ -14,102 +16,102 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 });
 
-
-$(".search").keyup(function(){
-    rastreator($(this));
-});
-$(".search").keydown(function(){
-    rastreator($(this));
-});
-
-function rastreator(elem){
-    var rastrear="#datos tbody tr ."+elem.attr("busqueda");
-    var contenido=elem.val();
-    $(rastrear).each(function(){
-        var texto=$(this).text();
-        if(texto.startsWith(contenido)){
-            $(this).parents("tr").show();
-        }else{
-            $(this).parents("tr").hide();
-        }
-    });
-}
-
 //NOTE Función genérica para peticiones ajax con JQuery
 function ajaxRequest(method, url, data, dateType) {
-    var ajaxResponse;
-
-    $.ajax({
+    return $.ajax({
         method: method,
         url: url,
         data: data,
-        dateType: dateType
-    }).done(function(data) {
-        ajaxResponse = data;
-    }).fail( function( jqXHR, textStatus, errorThrown ) {
-
-        if (jqXHR.status === 0) {
-            ajaxResponse = {
-                error: 'No concetado: verifique su conexión'
-            }
-        } else if (jqXHR.status == 404) {
-          ajaxResponse = {
-                error: '[404]: el servicio no existe'
-            }
-        } else if (jqXHR.status == 500) {
-          ajaxResponse = {
-                error: '[500]: Error interno del servidor'
-            }
-        } else if (textStatus === 'parsererror') {
-          ajaxResponse = {
-                error: 'JSON enviado erroneo'
-            }
-        } else if (textStatus === 'timeout') {
-          ajaxResponse = {
-                error: 'Se agoto el tiempo de espera de la petición'
-            }
-        } else if (textStatus === 'abort') {
-          ajaxResponse = {
-                error: 'La petición fue abortada por el servidor'
-            }
-        } else {
-          ajaxResponse = {
-                error: 'Error desconocido: ' + jqXHR.responseText
-            }
-        }
-    }).always(function() {
-        ajaxResponse = {
-            error: 'El proceso se ha ciclado'
+        dateType: dateType,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        beforeSend: function () {
+            $(".error500").hide();
+            $('.modal').modal('show');
+        },
+        success: function () {
+            $('.modal').modal('hide');
+        },
+        fail: function (jqXHR, textStatus, errorThrown) {
+            ajaxErrorRequest(jqXHR, textStatus, errorThrown);
         }
     });
-
-    return ajaxResponse;
 }
 
-$(document).on('click', '.edit', function() {
-    $(this).parent().siblings('td.data').each(function() {
-      var content = $(this).html();
-      $(this).html('<input value="' + content + '" />');
+//NOTE Función genérica para controlar errores en las peticiones ajax con JQuery
+function ajaxErrorRequest(jqXHR, textStatus, errorThrown) {
+    if (jqXHR.status === 0) {
+        $('.msgErrorAjax').append('La petición no se pudo realizar, por favor verifique su conexión a internet');
+    } else if (jqXHR.status == 404) {
+        $('.msgErrorAjax').append('Error 404, el recurso solicitado no existe, por favor contate al área de TI');
+    } else if (jqXHR.status == 500) {
+        console.log("Error 500 \nProceso no Completado contacte Sistemas\n" + JSON.stringify(jqXHR.responseText));
+        $('.msgErrorAjax').append('Error interno del servidor, por favor contacte al área de TI');
+    } else if (textStatus === 'parsererror') {
+        $('.msgErrorAjax').append('El JSON no cuenta con los atributos correctos, por favor contate al área de TI');
+    } else if (textStatus === 'timeout') {
+        $('.msgErrorAjax').append('El tiempo de espera supero al servidor, por favor reintentelo en 5 min');
+    } else if (textStatus === 'abort') {
+        $('.msgErrorAjax').append('La petición Ajax fue abortada, por favor reintentelo en 5 min');
+    } else {
+        console.log('Uncaught Error: ' + jqXHR.responseText);
+        $('.msgErrorAjax').append('Error desconocido, por favor contate al área de TI');
+    }
+    $('.error500').show();
+    setTimeout(function () {
+        $('.modal').modal('hide');
+        $('.error500').hide();
+    }, 3000);
+}
+/**!SECTION Finaliza sección de funciones generales */
+
+/**SECTION Inicia sección de funciones para el datatable */
+//Pintar actualización tabla
+function pintaTabla(data) {
+    $("#datos > tbody").empty();
+
+    data.users.forEach(element => {
+        row = "<tr>"+
+            "<td>"+ element.name +"</td>"+
+            "<td>"+ element.email +"</td>"+
+            "<td>"+ new Date(element.created_at).toLocaleDateString("en-US") +"</td>"+
+            "<td>"+ element.isActive +"</td>"+
+            "<td class='text-right'></td>"+
+        "</tr>";
+        $("#datos > tbody").append(row);
+    });
+}
+
+//NOTE Funciones para controlar el funcionamiento de las celdas
+//NOTE Configuración Editar celdas
+$(document).on('click', '.edit', function () {
+    $(this).parent().siblings('td.data').each(function () {
+        var content = $(this).html();
+        $(this).html('<input value="' + content + '" />');
     });
     $(this).siblings('.save').show();
     $(this).siblings('.delete').hide();
     $(this).hide();
-  });
-  $(document).on('click', '.save', function() {
-    $('input').each(function() {
-      var content = $(this).val();
-      $(this).html(content);
-      $(this).contents().unwrap();
+});
+
+//NOTE Configuración Guardar regitros
+$(document).on('click', '.save', function () {
+    $('input').each(function () {
+        var content = $(this).val();
+        $(this).html(content);
+        $(this).contents().unwrap();
     });
     $(this).siblings('.edit').show();
     $(this).siblings('.delete').show();
     $(this).hide();
-  });
-  $(document).on('click', '.delete', function() {
+});
+
+//NOTE Configuración Eliminar regitros
+$(document).on('click', '.delete', function () {
     $(this).parents('tr').remove();
-  });
-  $('.add').click(function() {
+});
+
+//NOTE Configuración Agregar regitros
+$('.add').click(function () {
     $(this).parents('table').append('<tr><td class="data"></td><td class="data"></td><td class="data"></td><td><button class="save">Save</button><button class="edit">Edit</button> <button class="delete">Delete</button></td></tr>');
-  });
-
-
+});
+/**!SECTION Finaliza sección de funciones para el datatable */

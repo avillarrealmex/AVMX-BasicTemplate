@@ -186,33 +186,48 @@ nav li:hover ul {
 /**********!SECTION Finaliza configuración content-body **********/
 
 /**********SECTION Inicia diseño tablas editables **********/
-
-.table {
-    border: #295505 rounded;
-}
-
-thead th{
+.tittleSection {
     position: sticky !important;
     top: 66px;
     z-index: 1020;
 }
 
-.table-responsive {
-    height:100% !important;
-    overflow-y:scroll;
-    overflow-x:hidden;
+.findSection {
+    position: sticky !important;
+    top: 90px;
+    z-index: 1020;
 }
 
-.table thead th{
-    vertical-align:middle;
-    padding: 5px, 5px;
-    font-size: 25px;
+.searchForm {
+    display: inline-block;
+}
+
+.table-responsive {
+    height: 100% !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.table thead th {
+    vertical-align: middle;
     text-transform: uppercase;
     vertical-align: top;
     color: #1D4A5A;
     font-weight: normal;
     text-align: left;
     background: rgb(124, 232, 165);
+    text-align: center;
+}
+
+.table thead th input,
+.table tbody td input {
+    width: 100%;
+    padding: 0px;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>td {
+    padding: 0;
 }
 
 tr:first-child {
@@ -231,10 +246,9 @@ td:hover {
 
 
 .table tbody tr td {
-    vertical-align:middle;
+    vertical-align: middle;
     padding: 5px;
     background: #f2f2f2 transparent;
-    font-size: 14px;
 }
 
 .add {
@@ -294,30 +308,52 @@ td:hover {
 
 .save {
     display: none;
-    background: #32AD60;
-    color: #ffffff;
+    background: #278e19;
+    color: #e4f3e7;
 }
+
 .save :hover {
-    background: darken(#32AD60, 10%);
+    background: darken(#278e19, 10%);
 }
 
 .edit {
-    background: #2199e8;
-    color: #ffffff;
+    background: #7c89e8;
+    color: #e4f3e7;
 
 }
 
 .edit :hover {
-    background: darken(#2199e8, 10%);
+    background: darken(#7c89e8, 10%);
 }
+
 .delete {
-    background: #EC5840;
-    color: #ffffff;
+    background: #e87c89;
+    color: #e4f3e7;
 
 }
 
 .delete :hover {
-    background: darken(#EC5840, 10%);
+    background: darken(#e87c89, 10%);
 }
-/**********!SECTION Finaliza diseño tablas editables **********/
 
+/**********!SECTION Finaliza diseño tablas editables **********/
+/**********SECTION Inicia diseño para los modales **********/
+/* NOTE Estilo para el modal de uploading */
+.bd-example-modal-lg .modal-dialog {
+    display: table;
+    position: relative;
+    margin: 0 auto;
+    top: 40%;
+}
+
+.bd-example-modal-lg .modal-dialog .modal-content {
+    background-color: transparent;
+    border: none;
+}
+
+.modal-backdrop {
+    background-color: rgb(39, 142, 25);
+    background-color: rgb(39, 142, 25, 0.45);
+}
+
+/**********!SECTION Finaliza diseño para los modales **********/

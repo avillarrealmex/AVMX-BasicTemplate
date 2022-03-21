@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--NOTE CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Cache-control" content="no-cache">
     <title>{{ config('app.name', 'test') }}</title>
     <!--NOTE Importamos los Scripts JS -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/nikken.js') }}" defer></script>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}" defer></script>
+    <script src="{{ asset('js/management/users.js') }}" defer></script>
+
     <!--NOTE Importamos Styles CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nikken.css') }}" rel="stylesheet">
@@ -45,5 +48,10 @@
         @include('layouts.includes.footer')
     </div>
     {{-- finaliza sección del footer --}}
+    {{--NOTE Inicia sección de los modales --}}
+    <div class="modal">
+        @include('layouts.includes.modals')
+    </div>
+    {{-- finaliza sección de los modales --}}
 </body>
 </html>
