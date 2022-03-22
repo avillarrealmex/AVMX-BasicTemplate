@@ -39,4 +39,19 @@
             </tbody>
         </table>
     </div>
+
+    <div class="container bootstrap snippets bootdey">
+        <div class="btn-demo" id="btn-color-targets">
+            <a href="#modalColor" data-target-color="blue" data-toggle="modal" class="btn btn-default ">Blue</a>
+            <a href="#modalColor" data-target-color="lightblue" data-toggle="modal" class="btn btn-default ">Light Blue</a>
+            <a href="#modalColor" data-target-color="cyan" data-toggle="modal" class="btn btn-default ">Cyan</a>
+            <a href="#modalColor" data-target-color="green" data-toggle="modal" class="btn btn-default ">Green</a>
+            <a href="#modalColor" data-target-color="lightgreen" data-toggle="modal" class="btn btn-default ">Light Green</a>
+            <a href="#modalColor" data-target-color="red" data-toggle="modal" class="btn btn-default ">Red</a>
+            <a href="#modalColor" data-target-color="amber" data-toggle="modal" class="btn btn-default ">Amber</a>
+            <a href="#modalColor" data-target-color="orange" data-toggle="modal" class="btn btn-default ">Orange</a>
+            <a href="#modalColor" data-target-color="teal" data-toggle="modal" class="btn btn-default ">Teal</a>
+            <a href="#modalColor" data-target-color="bluegray" data-toggle="modal" class="btn btn-default ">Blue Gray</a>
+        </div>
+    </div>
 @endsection

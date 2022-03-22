@@ -26,10 +26,10 @@ function ajaxRequest(method, url, data, dateType) {
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         beforeSend: function () {
             $(".error500").hide();
-            $('.modal').modal('show');
+            $('.bd-example-modal-lg').show();
         },
         success: function () {
-            $('.modal').modal('hide');
+            $('.bd-example-modal-lg').hide();
         },
         fail: function (jqXHR, textStatus, errorThrown) {
             ajaxErrorRequest(jqXHR, textStatus, errorThrown);
