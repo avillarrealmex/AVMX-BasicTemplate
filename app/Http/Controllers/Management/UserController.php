@@ -49,26 +49,39 @@ class UserController extends Controller
      */
 
     public function create(Request $request) {
-        $request->validate ([
-            'name' => 'required|string|regex:/^[a-zA-Z ]+$/',
-            'password' => [
-                'required',
-                'string',
-                'min:6',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-            ],
-            'password_confirm' => 'required|same:password|min:6',
-            'email'=>'required|email',
-        ]);
+        $request->validate (
+            [
+                'name' => 'required|string|regex:/^[a-zA-Z ]+$/',
+                'password' => [
+                    'required',
+                    'string',
+                    'min:6',
+                    'regex:/[a-z]/',
+                    'regex:/[A-Z]/',
+                    'regex:/[0-9]/',
+                ],
+                'password_confirm' => 'required|same:password|min:6',
+                'email'=>'required|email'],
+            [
+                'name.required' => 'El nombre es requerido',
+                'password.required' => 'La contraseña debe contar con almenos 6 dígitos',
+                'password_confirm.required' => 'No concuerda la contraseña',
+                'email.required' => 'El email es requerido',
+            ]
+        );
 
         try {
             //forma 1 objeto Simplificado
             User::create($this->UserObject($request));
+            return view('management.users.create', [
+
+            ]);
         } catch (\Throwable $th) {
             return view();
         }
+
+
+
 
         //Forma 2 Sql nativo
         /* DB::connection('sqlsrv')

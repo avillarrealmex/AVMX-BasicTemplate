@@ -39,8 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     #Links de gestión
     Route::group(['prefix'=>'management/user'], function() {
         Route::match(['get','post'], '/index',[UserController::class,'viewUserTable'])->name('user.table');
-        Route::get('/create',[UserController::class,'viewUserFormCreate'])->name('user.formCreate');
-        Route::post('/create',[UserController::class,'create'])->name('user.create');
+        //Route::get('/create',[UserController::class,'viewUserFormCreate'])->name('user.formCreate');
+        Route::match(['get','post'], '/create',[UserController::class,'create'])->name('user.create');
     });
 
     Route::group(['prefix'=>'management/provider'], function() {
