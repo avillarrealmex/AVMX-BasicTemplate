@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast;
 
 class UserController extends Controller
 {
@@ -16,18 +17,15 @@ class UserController extends Controller
     public function viewUserTable(Request $request) {
         try {
             $objectUsers = $this->listAll($request);
-
             if ($request->ajax()) {
                 return response()->json([
                     'users' => $objectUsers->users,
-                    'tittleColumns' => $objectUsers->tittleColumns,
-                    'tittleHeaders' => $objectUsers->tittleHeaders,
+                    'userTableDefinition' => $objectUsers->userTableDefinition
                 ]);
             } else {
                 return view('management.users.table', [
                     'users' => $objectUsers->users,
-                    'tittleColumn' => $objectUsers->tittleColumns,
-                    'tittleHeaders' => $objectUsers->tittleHeaders,
+                    'userTableDefinition' => $objectUsers->userTableDefinition
                 ]);
             }
         } catch (\Throwable $th) {
@@ -106,8 +104,6 @@ class UserController extends Controller
     }
 
     public function listAll(Request $request) {
-        $tittleColumns = array('Usuario','email','Creado el', 'status');
-        $tittleHeaders = array('name', 'email', 'created_at', 'isActive');
         //DB::enableQueryLog(); //Se ocupa para debug de la consulta
         //Forma 1 Objeto simplificado
         $query = User::select('id', 'name', 'email', 'created_at')
@@ -155,8 +151,7 @@ class UserController extends Controller
 
         $objectUsers = new \stdClass();
         $objectUsers->users = $users;
-        $objectUsers->tittleColumns = $tittleColumns;
-        $objectUsers->tittleHeaders = $tittleHeaders;
+        $objectUsers->userTableDefinition = $this->GetObjectFromUserTable();
 
         return $objectUsers;
     }
@@ -198,7 +193,8 @@ class UserController extends Controller
         }
 
         //Forma 1 Objeto simplificado
-        $userDeleted = User::where('id', '=', $request->id);
+        $userDeleted = User::where('id', '=', $request->id)
+            ->delete();
 
         //Forma 2 Sql nativo
         /* $userDeleted = DB::connection('sqlsrv')
@@ -248,6 +244,40 @@ class UserController extends Controller
         $user->password = bcrypt($request['password']);
         $user->email = $request['email'];
         return $user;
+    }
+
+    private function GetObjectFromUserTable() {
+
+        $userTableDefinition = array();
+
+        $userTableDefinition[0] = new \stdClass;
+        $userTableDefinition[0]->tittleColumn = 'Usuario';
+        $userTableDefinition[0]->tittleHeader = 'name';
+        $userTableDefinition[0]->typeData = 'text';
+        $userTableDefinition[0]->isRequired = true;
+
+        $userTableDefinition[1] = new \stdClass;
+        $userTableDefinition[1]->tittleColumn = 'Email';
+        $userTableDefinition[1]->tittleHeader = 'email';
+        $userTableDefinition[1]->typeData = 'email';
+        $userTableDefinition[1]->isRequired = true;
+
+        $userTableDefinition[2] = new \stdClass;
+        $userTableDefinition[2]->tittleColumn = 'Creado el';
+        $userTableDefinition[2]->tittleHeader = 'created_at';
+        $userTableDefinition[2]->typeData = '';
+        $userTableDefinition[2]->isRequired = true;
+
+        $userTableDefinition[3] = new \stdClass;
+        $userTableDefinition[3]->tittleColumn = 'status';
+        $userTableDefinition[3]->tittleHeader = 'isActive';
+        $userTableDefinition[3]->typeData = 'select';
+        $userTableDefinition[3]->isRequired = true;
+        $userTableDefinition[3]->options = array(0 => 'Inactivo', 1 =>'Activo');
+
+        dd($userTableDefinition);
+
+        return $userTableDefinition;
     }
 }
 

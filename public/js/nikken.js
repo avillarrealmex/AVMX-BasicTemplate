@@ -25,11 +25,11 @@ function ajaxRequest(method, url, data, dateType) {
         dateType: dateType,
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         beforeSend: function () {
-            $(".error500").hide();
-            $('.bd-example-modal-lg').show();
+            $('.charge').show();
         },
         success: function () {
-            $('.bd-example-modal-lg').hide();
+            $('.charge').hide();
+
         },
         fail: function (jqXHR, textStatus, errorThrown) {
             ajaxErrorRequest(jqXHR, textStatus, errorThrown);
@@ -63,55 +63,3 @@ function ajaxErrorRequest(jqXHR, textStatus, errorThrown) {
     }, 3000);
 }
 /**!SECTION Finaliza sección de funciones generales */
-
-/**SECTION Inicia sección de funciones para el datatable */
-//Pintar actualización tabla
-function pintaTabla(data) {
-    $("#datos > tbody").empty();
-
-    data.users.forEach(element => {
-        row = "<tr>"+
-            "<td>"+ element.name +"</td>"+
-            "<td>"+ element.email +"</td>"+
-            "<td>"+ new Date(element.created_at).toLocaleDateString("en-US") +"</td>"+
-            "<td>"+ element.isActive +"</td>"+
-            "<td class='text-right'></td>"+
-        "</tr>";
-        $("#datos > tbody").append(row);
-    });
-}
-
-//NOTE Funciones para controlar el funcionamiento de las celdas
-//NOTE Configuración Editar celdas
-$(document).on('click', '.edit', function () {
-    $(this).parent().siblings('td.data').each(function () {
-        var content = $(this).html();
-        $(this).html('<input value="' + content + '" />');
-    });
-    $(this).siblings('.save').show();
-    $(this).siblings('.delete').hide();
-    $(this).hide();
-});
-
-//NOTE Configuración Guardar regitros
-$(document).on('click', '.save', function () {
-    $('input').each(function () {
-        var content = $(this).val();
-        $(this).html(content);
-        $(this).contents().unwrap();
-    });
-    $(this).siblings('.edit').show();
-    $(this).siblings('.delete').show();
-    $(this).hide();
-});
-
-//NOTE Configuración Eliminar regitros
-$(document).on('click', '.delete', function () {
-    $(this).parents('tr').remove();
-});
-
-//NOTE Configuración Agregar regitros
-$('.add').click(function () {
-    $(this).parents('table').append('<tr><td class="data"></td><td class="data"></td><td class="data"></td><td><button class="save">Save</button><button class="edit">Edit</button> <button class="delete">Delete</button></td></tr>');
-});
-/**!SECTION Finaliza sección de funciones para el datatable */

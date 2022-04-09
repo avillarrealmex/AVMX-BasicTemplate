@@ -110,7 +110,7 @@
     display: inline;
     text-align: left;
     padding: 5px 5px 5px 8px;
-    border: 1px solid#2be974;
+    border: 1px solid #2be974;
     border-radius: 5px;
     background: #7ce8a5;
     opacity: 0.6;
@@ -123,7 +123,7 @@
     display: inline-block;
     text-align: left;
     padding: 5px 5px 5px 8px;
-    border: 1px solid#2be974;
+    border: 1px solid #2be974;
     border-radius: 5px;
     background: #9fe6ba;
     opacity: 0.5;
@@ -243,8 +243,6 @@ td:hover {
     transition-timing-function: line;
 }
 
-
-
 .table tbody tr td {
     vertical-align: middle;
     padding: 5px;
@@ -339,76 +337,37 @@ td:hover {
 /**********!SECTION Finaliza diseño tablas editables **********/
 /**********SECTION Inicia diseño para los modales **********/
 /* NOTE Estilo para el modal de uploading */
-.bd-example-modal-lg .modal-dialog {
-    display: table;
-    position: relative;
-    margin: 0 auto;
-    top: 40%;
-}
-
-.bd-example-modal-lg .modal-dialog .modal-content {
-    background-color: transparent;
-    border: none;
-}
-
-.modal-backdrop {
+.charge {
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    z-index: 1055; /* Sit on top */
+    display: none;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-x: hidden; /* Enable scroll if needed */
+    overflow-y: auto; /* Enable scroll if needed */
+    outline: 0;
     background-color: rgb(39, 142, 25);
     background-color: rgb(39, 142, 25, 0.45);
+
+  }
+
+  /* Modal Content */
+.charge-content {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 30%;
+    margin: auto;
 }
 
-/* NOTE Estilo change color modals */
-.modal[data-modal-color] {
-  color: #fff;
-}
-
-.modal .modal-header {
-  padding: 23px 26px;
-  border-bottom: 1px solid transparent;
-}
-
-.modal .modal-content {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.31);
-  border-radius: 3px;
-  border: 0;
-}
-
-.modal-footer {
-  padding: 15px;
-  text-align: right;
-  border-top: 1px solid transparent;
-}
-
-.modal[data-modal-color] .modal-footer {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.modal[data-modal-color] .modal-footer .btn-link {
-  font-weight: 400;
-}
-
-.modal[data-modal-color] .modal-title, .modal[data-modal-color] .modal-footer .btn-link {
-  color: #fff;
-}
-
-.modal .modal-footer .btn-link {
-  font-size: 14px;
-  color: #000;
-  font-weight: 500;
-}
-
-.btn-link {
-  color: #797979;
-  text-decoration: none;
-  border-radius: 2px;
-}
-
-.modal[data-modal-color] .modal-footer .btn-link:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  text-decoration:none;
-}
-
-.modal[data-modal-color] .modal-footer .btn-link {
-  font-weight: 400;
+.error500 {
+    display: none;
 }
 
 /* ========== MODAL COLORS ===============================*/
@@ -451,6 +410,4 @@ td:hover {
 .modal[data-modal-color="bluegray"] .modal-content {
   background: #607d8b;
 }
-
-
 /**********!SECTION Finaliza diseño para los modales **********/

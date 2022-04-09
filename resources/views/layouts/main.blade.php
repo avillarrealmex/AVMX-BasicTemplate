@@ -49,9 +49,7 @@
     </div>
     {{-- finaliza sección del footer --}}
     {{--NOTE Inicia sección de los modales --}}
-    <div class="modal">
-        @include('layouts.includes.modals')
-    </div>
+    @include('layouts.includes.modals')
     {{-- finaliza sección de los modales --}}
 </body>
 </html>

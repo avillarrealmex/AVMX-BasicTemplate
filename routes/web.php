@@ -28,6 +28,7 @@ Route::post('/check-login',[LoginController::class,'checklogin'])->name('post.lo
 Route::group(['prefix'=>'qrCode'], function() {
     Route::get('/index',[QrCodeController::class,'viewGenerateQrCode'])->name('qrCode.generate');
     Route::get('/scan',[QrCodeController::class,'viewScanQrCode'])->name('qrCode.scan');
+    Route::get('/readCSV',[QrCodeController::class,'readCSV'])->name('qrCode.readCSV');
 });
 
 //secureLinks
@@ -41,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::match(['get','post'], '/index',[UserController::class,'viewUserTable'])->name('user.table');
         //Route::get('/create',[UserController::class,'viewUserFormCreate'])->name('user.formCreate');
         Route::match(['get','post'], '/create',[UserController::class,'create'])->name('user.create');
+        Route::match(['post'], '/delete',[UserController::class,'delete'])->name('user.delete');
+        Route::match(['post'], '/update',[UserController::class,'update'])->name('user.update');
     });
 
     Route::group(['prefix'=>'management/provider'], function() {
