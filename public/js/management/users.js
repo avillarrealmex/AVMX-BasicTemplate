@@ -26,43 +26,44 @@ $(document).ready(function(){
 });
 
 //NOTE Funciones para controlar el funcionamiento de las celdas
+//NOTE Crear nuevo usuario
+$(document).on('click', '.newUser', function () {
+    //Limpiamos el formulario
+    $('#name').empty();
+    $('#email').empty();
+    $('#mangementUser').modal('show'); //Muestrame el modal
+});
 //NOTE Configuración Editar celdas
 $(document).on('click', '.edit', function () {
+    $('#mangementUser').modal('show'); //Muestrame el modal
+
+    userId = $(this).parent().parent().attr('userid');
+    $('#id').val(userId);
+    //Recorre la fila de donde se clickeo el botón edit
     $(this).parent().siblings('td.data').each(function () {
-        var content = $(this).html();
-        switch ($(this).attr('dataType')) {
-            case 'text':
-                $(this).html('<input type="text" value="' + content + '" />');
-                break;
-            case 'number':
-                $(this).html('<input type="number" value="' + content + '" />');
-                break;
-            case 'email':
-                $(this).html('<input type="email" value="' + content + '" />');
-                break;
-            case 'date':
-                $(this).html('<input type="date" value="' + content + '" />');
-                break;
-            case 'select':
-                $(this).html('<select> </select>');
-                break;
-            case 'radio':
-                $(this).html('<input type="radio" value="' + content + '" />');
-                break;
-            case 'checkbox':
-                $(this).html('<input type="checkbox" value="' + content + '" />');
-                break;
-            default:
-                $(this).html(content);
-                break;
-        }
+        //por cada td.data guarda en content el valor de esa celda
+        var tittleheader = $(this).attr('tittleheader'); //Obtenemos el nombre del campo para instanciarlo en el formulario
+        var content = $(this).html().trim(); //Obtenemos el valor de la celda
+        $('#'+tittleheader).val(content);//Asignamos el valor al input del formulario
     });
-    $(this).siblings('.save').show();
-    $(this).siblings('.delete').hide();
-    $(this).hide();
 });
 
-//NOTE Configuración Guardar regitros
+//NOTE Configuración Eliminar regitros
+$(document).on('click', '.delete', function () {
+    let UserObject = {
+        'id': $(this).parent().parent().attr('userid') //Obtenemos el Id del registro a eliminar
+    }
+    $(this).parents('tr').remove();//Si la respuesta es satisfactoria, eliminamos la fila
+    promise = ajaxRequest('POST', 'delete', UserObject, 'json'); //Instanciamos función ajaxRequest de NikkenJS
+    promise.done(function (data) {
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        ajaxErrorRequest(jqXHR, textStatus, errorThrown);
+    });
+
+});
+
+/* //NOTE Configuración Guardar regitros
 $(document).on('click', '.save', function () {
     $('input').each(function () {
         var content = $(this).val();
@@ -77,48 +78,12 @@ $(document).on('click', '.save', function () {
     $(this).siblings('.edit').show();
     $(this).siblings('.delete').show();
     $(this).hide();
-});
+}); */
 
-//NOTE Configuración Eliminar regitros
-$(document).on('click', '.delete', function () {
-    $(this).parents('tr').remove();
-});
-
-//NOTE Configuración Agregar regitros
+/* //NOTE Configuración Agregar regitros
 $('.add').click(function () {
     $(this).parents('table').append('<tr><td class="data"></td><td class="data"></td><td class="data"></td><td><button class="save">Save</button><button class="edit">Edit</button> <button class="delete">Delete</button></td></tr>');
-});
-
-$(".save").click(function () {
-    /* let UserObject = [
-        'id' = 0,
-        'name' = '',
-        'email' = ''
-    ];
-
-    tr = $(this).parent().parents('tr');
-    UserObject.id = tr.attr('userid');
-
-    $(this).parent().parent().each(function() {
-        $(this).find("td").find('input').each(function($tabla){
-            if ($tabla.id() === 'name') {
-                UserObject.name = $tabla.val()
-            }
-            if ($tabla.id() === 'email') {
-                UserObject.email = $tabla.val()
-            }
-        });
-    });
-    console.log(UserObject); */
-    /* promise = ajaxRequest('POST', 'delete', UserObject, 'json');
-
-    promise.done(function (data) {
-        pintaTabla(data);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        ajaxErrorRequest(jqXHR, textStatus, errorThrown);
-    }); */
-});
-
+}); */
 
 /**SECTION  Inician funciones especiales*/
 //Pintar actualización tabla

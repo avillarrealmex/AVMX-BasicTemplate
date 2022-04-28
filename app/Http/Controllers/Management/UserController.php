@@ -103,6 +103,41 @@ class UserController extends Controller
         return redirect()->route('users.table');
     }
 
+    public function management(Request $request) {
+
+        try {
+            /* $request->validate ([
+                'name' => 'required|string|regex:/^[a-zA-Z ]+$/',
+                'email'=>'required|email'
+            ],[
+                'name.required' => 'El nombre es requerido',
+                'email.required' => 'El email es requerido',
+            ]); */
+
+            if ($request->id > 0) {
+                User::where('id', '=', $request->id)
+                    ->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                    ]);
+            } else {
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => bcrypt('123'),
+                    'isActive' => boolval(true),
+                ]);
+            }
+
+            return redirect()->back()->with('message','Operation Successful !');
+        } catch (\Throwable $th) {
+            if ($request->ajax()) {
+                dd($th->getMessage());
+            } else {
+                return view('layouts.errors.500', ['message' => $th->getMessage()]);
+            }
+        }
+    }
     public function listAll(Request $request) {
         //DB::enableQueryLog(); //Se ocupa para debug de la consulta
         //Forma 1 Objeto simplificado
@@ -240,9 +275,11 @@ class UserController extends Controller
     /* Objeto Usuario */
     private function UserObject($request) {
         $user = new User;
-        $user->name = $request['name'];
-        $user->password = bcrypt($request['password']);
-        $user->email = $request['email'];
+        $user->name = isset($request['name']) ? $request['name'] : '';
+        if (isset($request['password']) ) {
+            $user->password = isset($request['password']) ? bcrypt($request['password']) : bcrypt('123');
+        }
+        $user->email = isset($request['email']) ? $request['email'] : '';
         return $user;
     }
 
@@ -274,9 +311,6 @@ class UserController extends Controller
         $userTableDefinition[3]->typeData = 'select';
         $userTableDefinition[3]->isRequired = true;
         $userTableDefinition[3]->options = array(0 => 'Inactivo', 1 =>'Activo');
-
-        dd($userTableDefinition);
-
         return $userTableDefinition;
     }
 }

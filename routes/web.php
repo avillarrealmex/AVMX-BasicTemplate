@@ -39,11 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     #Links de gestión
     Route::group(['prefix'=>'management/user'], function() {
-        Route::match(['get','post'], '/index',[UserController::class,'viewUserTable'])->name('user.table');
+        Route::match(['get','post'], 'index',[UserController::class,'viewUserTable'])->name('user.table');
         //Route::get('/create',[UserController::class,'viewUserFormCreate'])->name('user.formCreate');
-        Route::match(['get','post'], '/create',[UserController::class,'create'])->name('user.create');
-        Route::match(['post'], '/delete',[UserController::class,'delete'])->name('user.delete');
-        Route::match(['post'], '/update',[UserController::class,'update'])->name('user.update');
+        Route::match(['get','post'], 'create',[UserController::class,'create'])->name('user.create');
+        Route::match(['get','post'], 'management',[UserController::class,'management'])->name('user.management');
+        Route::match(['post'], 'delete',[UserController::class,'delete'])->name('user.delete');
+        Route::match(['post'], 'update',[UserController::class,'update'])->name('user.update');
     });
 
     Route::group(['prefix'=>'management/provider'], function() {
