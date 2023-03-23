@@ -17,4 +17,24 @@ class CustomerController extends Controller
     /**
      * Sección para funciones y procedimientos
      */
+
+     public function viewCustom3erTable() {
+        return view('management.customer');
+    }
+
+    public function viewCustom4erTable() {
+        return view('management.customer');
+    }
+
+    public function viewCus4tomerTable() {
+        return view('management.customer');
+    }
+
+    public function viewCustomerT4able() {
+        return view('management.customer');
+    }
+
+    public function viewCustomerTabl5e() {
+        return view('management.customer');
+    }
 }
