@@ -1,10 +1,34 @@
 /** Sección de variables o parámetros iniciales */
 const globalPrefix = '/v0.1/test/';
+let allowRefresh = false;
+let countqueue = 0;
 
 /**SECTION Inicia sección de funciones generales */
 //NOTE Función botones genericos
-$(document).on('click', '#sendForm', function () {
+$(document).on('click', '#setCountry', function () {
     $('.charge').show();
+});
+
+//NOTE mostrar/ ocultar sidebar
+$(document).on('click', '#toggleBtn', function () {
+    let sidebarWidth = $("#sidebarMenu").width();
+    if (sidebarWidth > 0) {
+        $("#sidebarMenu").removeClass('col-md-3 col-lg-2 d-md-block');
+        $("#mainBody").removeClass('col-md-9 col-lg-10');
+        $("#mainBody").addClass('col-md-12 col-lg-12');
+
+        $("#sidebarMenu").addClass('noSidebar');
+        $(this).removeClass('header-toggle');
+        $(this).addClass('no-header-toggle');
+    } else {
+        $("#sidebarMenu").addClass('col-md-3 col-lg-2 d-md-block');
+        $("#mainBody").removeClass('col-md-12 col-lg-12');
+        $("#mainBody").addClass('col-md-9 col-lg-10');
+
+        $("#sidebarMenu").removeClass('noSidebar');
+        $(this).removeClass('no-header-toggle');
+        $(this).addClass('header-toggle');
+    }
 });
 
 //NOTE Función genérica para peticiones ajax con JQuery
@@ -51,6 +75,48 @@ function ajaxRequestWithFiles(method, url, data, dateType) {
     });
 }
 
+function asyncUploadImage(method, url, data, dateType) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            method: method,
+            url: globalPrefix + url,
+            data: data,
+            dateType: dateType,
+            contentType: false,
+            processData: false,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            beforeSend: function(  ) {
+                //console.log("inicia carga ");
+            },
+            success: function(JSONResponse) {
+                countqueue--;
+                //console.log("termina carga ");
+                resolve(JSONResponse)
+            },
+            error: function(err) {
+                console.log("Error carga ");
+                reject(err)
+            },
+        });
+    });
+}
+
+//NOTE Función petición ajax sin animación de carga
+function ajaxRequestWhitNotCharge(method, url, data, dateType, customBeforeSend) {
+    return $.ajax({
+        method: method,
+        url: globalPrefix + url,
+        data: data,
+        dateType: dateType,
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function () {
+        },
+        fail: function (jqXHR, textStatus, errorThrown) {
+            ajaxErrorRequest(jqXHR, textStatus, errorThrown);
+        }
+    });
+}
+
 //NOTE Función genérica para controlar errores en las peticiones ajax con JQuery
 function ajaxErrorRequest(jqXHR, textStatus, errorThrown) {
     $('.msgErrorAjax').empty();
@@ -69,7 +135,11 @@ function ajaxErrorRequest(jqXHR, textStatus, errorThrown) {
         $('.msgErrorAjax').append('La petición Ajax fue abortada, por favor reintentelo en 5 min');
     } else {
         console.log('Uncaught Error: ' + jqXHR.responseText);
-        $('.msgErrorAjax').append('Error desconocido, por favor contate al área de TI');
+        if(jqXHR.responseText.message === 'CSRF token mismatch.') {
+            window.location.href = window.location.host + globalPrefix + 'logout'
+        } else {
+            $('.msgErrorAjax').append('Error desconocido, por favor contate al área de TI');
+        }
     }
     $('#error500').modal('show');
     setTimeout(function () {
@@ -103,12 +173,17 @@ function strToDate(dateToConvert) {
     }
 }
 
-function strToCurrency(stringToConvert) {
-    return new Intl.NumberFormat('es-MX').format(stringToConvert);
+function strToCurrency(stringToConvert, minDigits, maxDigits) {
+    return new Intl.NumberFormat('es-MX', {
+        minimumFractionDigits: minDigits,
+        maximumFractionDigits: maxDigits,
+        /* style:'currency',
+        currency:'MXN', */
+    }).format(stringToConvert);
 }
 
 function currencyTostr(currencyToConvert) {
-    return currencyToConvert.toLocaleString().replace(/\D/g,'');
+    return currencyToConvert.toLocaleString('es-MX').replace(/,/g,'');
 }
 
 //NOTE Función borrar formulario
@@ -159,7 +234,11 @@ function getObjectFormData(formName) {
             case('email'):
             case('file'):
             case('hidden'):
-                objectFormData[this.name] = $(this).val();
+                if ($(this).attr("currency")) {
+                    objectFormData[this.name] = parseFloat(currencyTostr($(this).val()));
+                } else {
+                    objectFormData[this.name] = $(this).val();
+                }
             break;
             case('select-one'):
             case('radio'):
@@ -177,144 +256,69 @@ function getObjectFormData(formName) {
     return objectFormData;
 }
 
-//NOTE Función que controla el cambio de tabla/formulario
-function changeControlButton(action, tittleDiv, tittleActionButton, divFromClear) {
-    $('.charge').show();
-    $('.forms-Nikken').toggle("slow");
-    $('.tables-Nikken').toggle("slow");
+function createSelectObject (objectSelect, selectName) {
+    let selectElement = "<option value=''>Seleccione una opción</option>";
+    objectSelect.forEach(element => {
+        selectElement+= "<option value='"+ element.id +"'>"+ element.description +"</option>";
+    });
+    $('#'+selectName).empty();
+    $('#'+selectName).selectpicker('destroy');
+    $('#'+selectName).html(selectElement);
+    $('#'+selectName).selectpicker('refresh');
+}
+
+function errImg(imageId) {
+    $('#'+imageId).attr('src','https://intranet.nikken.com.mx:8064/images/logotipo nikken-02.png')
+}
+
+function errImgSection(imageId, itemCode) {
+    switch (itemCode) {
+        case 13541:
+            $('#'+imageId).attr('src','https://intranet.nikken.com.mx:8064/images/itemCode/'+itemCode+'.jpg')
+            break;
+        default:
+            $('#'+imageId).attr('src','https://intranet.nikken.com.mx:8064/images/logotipo nikken-02.png');
+            break;
+    }
+}
+
+//Función para mostrar modalAlert
+function showMsgAlert(msgAlert) {
+    $('.msgAlert').empty();
+    $('.msgAlert').append(msgAlert);
+
+    $('#modalAlertMsg').modal('show');
     setTimeout(function () {
-        if ($('.forms-Nikken').is(':visible')) {
-            $("#paginateSpan").hide();
-            $("#tableOrForm").find('span').text("Tabla");
-            $("#tableOrForm").find('i').removeClass('fa-solid fa-file-circle-plus').addClass('fa-solid fa-table');
-            switch (action) {
-                case 'create':
-                    clearForm(divFromClear);
-                    $('#formTittle').html('<h4 class="form formTittle">'+tittleDiv+'</h4>');
-                    $("#sendForm").find('span').text(' '+tittleActionButton);
-                    break;
-                case 'createWithErrors':
-                    $('#formTittle').html('<h4 class="form formTittle">'+tittleDiv+'</h4>');
-                    $("#sendForm").find('span').text(' '+tittleActionButton);
-                    break;
-                case 'update':
-                    $('#formTittle').html('<h4 class="form formTittle">'+tittleDiv+'</h4>');
-                    $("#sendForm").find('span').text(' '+tittleActionButton);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            $("#paginateSpan").show();
-            $("#tableOrForm").find('span').text("Crear");
-            $("#tableOrForm").find('i').removeClass('fa-solid fa-table').addClass('fa-solid fa-file-circle-plus');
-        }
-        $('.charge').hide();
-    }, 1500);
+        $('#modalAlertMsg').modal('hide');
+    }, 2000);
 }
 
-//NOTE Función pinta tabla generica Nikken
-/**
- * En peticiones Ajax que construya una tablaNikken el JSON a construir siempre deberá llevar 2 parámetros dataForTable y tableDefinition
- * @param {*} tableName
- * @param {*} JSONRequest
- */
-function pintaTablaNikken(tableName, tittleName, JSONRequest, styleForm) {
-    //Construimos la sección del thead parámetro tableDefinition
-    let thead, tbody = '';
-    $("#tittleModal").html('<h4> '+ tittleName +' </h4>');
-    $("#"+tableName+" > thead").empty();
-    thead+='<tr>';
-        for (let columIndex = 0; columIndex < Object.keys(JSONRequest.tableDefinition).length; columIndex++) {
-            if (JSONRequest.tableDefinition[columIndex].typeData !== 'hidden') {
-                thead+='<th class="tittleSection" scope="col"> '+ JSONRequest.tableDefinition[columIndex].tittleColumn +' </th>';
-            }
+//Función cronometro
+function chronometer(segundos, divContador) {
+    var countSecond = (segundos/100)-1;
+    setInterval(function() {
+        if (countSecond > 0) {
+            $('#'+divContador).html(countSecond);
         }
-        thead+='<th class="tittleSection" scope="col"> Acciones </th>'+
-    '</tr>'+
-    '<tr>';
-        for (let columIndex = 0; columIndex < Object.keys(JSONRequest.tableDefinition).length; columIndex++) {
-            if (JSONRequest.tableDefinition[columIndex].canFilter) {
-                switch(JSONRequest.tableDefinition[columIndex].typeData) {
-                    case 'select':
-                    thead+='<th class="form findSection" scope="col">'+
-                            '<select class="'+ styleForm +'" id="searchNikken" tittleHeader = "'+ JSONRequest.tableDefinition[columIndex].tittleHeader +'">';
-                                if (JSONRequest.findFilters[JSONRequest.tableDefinition[columIndex].tittleHeader] === null ) {
-                                    thead+='<option value="" selected>Seleccione una opción</option>';
-                                    JSONRequest.tableDefinition[columIndex].options.forEach(option => {
-                                        thead+='<option value='+ option.id +'>'+ option.description +'</option>';
-                                    });
-                                } else {
-                                    thead+='<option value="">Seleccione una opción</option>';
-                                    JSONRequest.tableDefinition[columIndex].options.forEach(option => {
-                                        if (option.id == JSONRequest.findFilters[JSONRequest.tableDefinition[columIndex].tittleHeader] ) {
-                                            thead+='<option value='+ option.id +' selected>'+ option.description +'</option>';
-                                        } else {
-                                            thead+='<option value='+ option.id +'>'+ option.description +'</option>';
-                                        }
-                                    });
-                                }
-                            thead+='</select>'+
-                        '</th>';
-                    break;
-                    case 'text':
-                    case 'number':
-                    case 'date':
-                    case 'datetime-local':
-                    case 'email':
-                        if (JSONRequest.findFilters[JSONRequest.tableDefinition[columIndex].tittleHeader]) {
-                            thead+='<th class="form findSection" scope="col">'+
-                                '<input class="'+ styleForm +'"id="searchNikken" type="'+ JSONRequest.tableDefinition[columIndex].typeData +'" tittleHeader = "'+ JSONRequest.tableDefinition[columIndex].tittleHeader +'" value="'+ JSONRequest.findFilters[JSONRequest.tableDefinition[columIndex].tittleHeader] +'">'+
-                            '</th>';
-                        } else {
-                            thead+='<th class="form findSection" scope="col">'+
-                                '<input class="'+ styleForm +'"id="searchNikken" type="'+ JSONRequest.tableDefinition[columIndex].typeData +'" tittleHeader = "'+ JSONRequest.tableDefinition[columIndex].tittleHeader +'">'+
-                            '</th>';
-                        }
-                    break;
-                    case 'hidden':
-                        thead+='<input class="'+ styleForm +'"id="'+ JSONRequest.tableDefinition[columIndex].tittleHeader +'" type="text" tittleHeader = "'+ JSONRequest.tableDefinition[columIndex].tittleHeader +'">';
-                    break;
-                    default:
-                        thead+='<th class="form bg-light" scope="col"></th>';
-                    break;
-                }
-            } else {
-                if (JSONRequest.tableDefinition[columIndex].typeData !== 'hidden') {
-                    thead+='<th class="form bg-light" scope="col"></th>';
-                }
-            }
-        }
-        thead+='<th class="form bg-light">'+
-            '<button type="button" class="btn fontawesomeAddRegister" id="addRegister" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver valor de la divisa"> <i class="fa-solid fa-file-circle-plus"></i> </button>'+
-        '</th>'+
-    '</tr>';
-    $("#"+tableName+" > thead").append(thead);
-
-    //Construimos el cuerpo de la tabla parámetro dataForTable
-    /* $("#"+tableName+" > tbody").empty(); */
-
-
-            /* @foreach ($currencies as $currency)
-                <tr currencyId = {{ isset($currency->id) ? $currency->id : 0 }}>
-                    <td class = "data" tittleHeader = "{{ $currenciesTableDefinition[1]->tittleHeader }}" dataType = "{{ $currenciesTableDefinition[1]->typeData }}">{{ isset($currency->currencyKey) ? $currency->currencyKey : '' }}</td>
-                    <td class = "data" tittleHeader = "{{ $currenciesTableDefinition[2]->tittleHeader }}" dataType = "{{ $currenciesTableDefinition[2]->typeData }}">{{ isset($currency->currencyName) ? $currency->currencyName : '' }}</td>
-                    <td class = "data" tittleHeader = "{{ $currenciesTableDefinition[3]->tittleHeader }}" dataType = "{{ $currenciesTableDefinition[3]->typeData }}">
-                        @foreach($currenciesTableDefinition[3]->options as $index=>$option)
-                            @if ($option->id == $currency->isCurrencyActive)
-                                {{ $option->description }}
-                            @endif
-                        @endforeach
-                    </td>
-                    <td class="text-right">
-                        <button type="button" class="btn fontawesomeEdit"  id="edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar registro"> <i class="fa-solid fa-pen-to-square"></i> </button>
-                        <button type="button" class="btn fontawesomeCoins" id="valueCurrency" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver valor de la divisa"> <i class="fa-solid fa-coins"></i> </button>
-                    </td>
-                </tr>
-            @endforeach */
+        countSecond--;
+    }, segundos);
 }
 
-//NOTE Fución ocupada para la opción de busqueda en la tabla
-$(document).on('change', '#searchNikken', function () {
+function generarKeyAletorio(longitud) {
+    var characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var charactersLength = characters.length;
+    var randomString = '';
+    for (var i = 0; i < Math.floor(Math.random() * (longitud + 1)); i++) {
+        randomString += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return randomString;
+}
 
+$(document).on('click', '#startGuide', function () {
+    localStorage.setItem("seen_tour", "false");
+});
+
+$(document).on('click', '#timeWarranties', function () {
+    let ruta = 'https://intranet.nikken.com.mx:8064/images/warranty/TABLA_TIEMPOS_GARANTIAS.pdf';
+    window.open(ruta, 'Tiempo garantías Nikken');
 });

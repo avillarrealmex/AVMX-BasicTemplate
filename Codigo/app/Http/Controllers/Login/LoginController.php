@@ -60,7 +60,7 @@ class LoginController extends Controller
                     setcookie('code', $request->code, time() + 60 * 60 * 24 * 100);
                     setcookie('password', $request->password, time() + 60 * 60 * 24 * 100);
                 }
-                $user = Users::select(['id_users','user','pass', 'password','nombre','puesto',
+                $user = Users::select(['id_users','user','pass', 'password','nombre','puesto', 'correo',
                         DB::raw("COALESCE(foto, 'Foto_default.jpg') AS foto")])
                     ->where('user', '=', $request->code)
                     ->where('activo', '=', 'Si')
@@ -76,6 +76,7 @@ class LoginController extends Controller
                         Session::put('nombre', !is_null($user->nombre) ? $user->nombre : array());
                         Session::put('puesto', !is_null($user->puesto) ? $user->puesto : array());
                         Session::put('foto', !is_null($user->foto) ? $user->foto : array());
+                        Session::put('correo', !is_null($user->correo) ? $user->correo : array());
                         Session::put('licenciasSAP', !is_null($user->permissions->licenciasSAP) ? $user->permissions->licenciasSAP : 'No');
                         Session::put('is_login', true);
 
@@ -126,6 +127,7 @@ class LoginController extends Controller
                     Session::put('nombre', !is_null($user->nombre) ? $user->nombre : array());
                     Session::put('puesto', !is_null($user->puesto) ? $user->puesto : array());
                     Session::put('foto', !is_null($user->foto) ? $user->foto : array());
+                    Session::put('correo', !is_null($user->correo) ? $user->correo : array());
                     Session::put('licenciasSAP', !is_null($user->permissions->licenciasSAP) ? $user->permissions->licenciasSAP : 'No');
                     Session::put('is_login', true);
 
@@ -146,6 +148,7 @@ class LoginController extends Controller
         Session::forget('nombre');
         Session::forget('puesto');
         Session::forget('foto');
+        Session::forget('correo');
         Session::forget('is_login');
         return redirect()->route('user.login');
     }
@@ -158,6 +161,9 @@ class LoginController extends Controller
         \Artisan::call('view:cache');
         \Artisan::call('view:clear');
         \Artisan::call('cache:clear');
-        return response()->json(['transaction' => 'cleared!!']);
+        return response()->json([
+            'transaction' => 'cleared!!',
+            'phpInfo' => phpinfo(),
+        ]);
     }
 }
