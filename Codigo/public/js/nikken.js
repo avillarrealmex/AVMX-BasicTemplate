@@ -4,32 +4,34 @@ let allowRefresh = false;
 let countqueue = 0;
 
 /**SECTION Inicia sección de funciones generales */
+$(document).ready(function() {
+    $('#sidebarMenu').attr("style", "display: block !important");
+    $('#mainContainer').attr("style", "padding-left: 41vh !important");
+    /* $('#mainContainer').removeClass('col-md-12 ml-sm-auto col-lg-12 px-4');
+    $('#mainContainer').addClass('col-md-9 ml-sm-auto col-lg-10 px-4'); */
+});
+
 //NOTE Función botones genericos
 $(document).on('click', '#setCountry', function () {
     $('.charge').show();
 });
 
 //NOTE mostrar/ ocultar sidebar
-$(document).on('click', '#toggleBtn', function () {
-    let sidebarWidth = $("#sidebarMenu").width();
-    if (sidebarWidth > 0) {
-        $("#sidebarMenu").removeClass('col-md-3 col-lg-2 d-md-block');
-        $("#mainBody").removeClass('col-md-9 col-lg-10');
-        $("#mainBody").addClass('col-md-12 col-lg-12');
-
-        $("#sidebarMenu").addClass('noSidebar');
-        $(this).removeClass('header-toggle');
-        $(this).addClass('no-header-toggle');
+$(document).on('click', '#showHideSidebar', function () {
+    if ($('#sidebarMenu').is(':visible') && $('#sidebarMenu').css("visibility") != "hidden" ) {
+        $('#sidebarMenu').attr("style", "display: none !important");
+        $('#mainContainer').attr("style", "padding-left: 0 px !important");
+        /* $('#mainContainer').removeClass('col-md-9 ml-sm-auto col-lg-10 px-4');
+        $('#mainContainer').addClass('col-md-12 ml-sm-auto col-lg-12 px-4'); */
     } else {
-        $("#sidebarMenu").addClass('col-md-3 col-lg-2 d-md-block');
-        $("#mainBody").removeClass('col-md-12 col-lg-12');
-        $("#mainBody").addClass('col-md-9 col-lg-10');
-
-        $("#sidebarMenu").removeClass('noSidebar');
-        $(this).removeClass('no-header-toggle');
-        $(this).addClass('header-toggle');
+        $('#sidebarMenu').attr("style", "display: block !important");
+        $('#mainContainer').attr("style", "padding-left: 41vh !important");
+        /* $('#mainContainer').removeClass('col-md-12 ml-sm-auto col-lg-12 px-4');
+        $('#mainContainer').addClass('col-md-9 ml-sm-auto col-lg-10 px-4'); */
     }
 });
+
+
 
 //NOTE Función genérica para peticiones ajax con JQuery
 function ajaxRequest(method, url, data, dateType) {

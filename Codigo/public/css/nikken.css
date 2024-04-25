@@ -1,7 +1,30 @@
+/**********SECTION Inicia configuración scrollbar css **********/
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #77a054 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #77a054;
+    border-radius: 10px;
+    border: 3px ridge #36543f;
+  }
+/**********!SECTION Finaliza configuración scrollbar css **********/
+
 /**********SECTION Inicia configuración general del sitio **********/
 @font-face {
     font-family: Montserrat;
-    src: url(..\fonts\montserrat\static\Montserrat-Regular.ttf);
+    src: url(../fonts/montserrat/static/Montserrat-Regular.ttf);
 }
 
 body {
@@ -10,10 +33,8 @@ body {
 
 /* Posicionamiento logo */
 .divLogoNikken {
-    left: 2vw;
-    top: 5px;
     width: inherit !important;
-    height: 10vh;
+    height: 6vh;
     align-items: center !important;
     align-content: center !important;
     text-align: center !important;
@@ -22,13 +43,22 @@ body {
 
 .logoNikken {
     opacity: 0.9;
-    width: 6vw;
-    height: 6vh;
+    width: 8vw;
+    height: 8vh;
     padding: 0px;
-    margin-top: 10px;
+}
+
+.btnSidebar {
+    position: inherit;
+    padding-left: 9vw;
 }
 
 /* Configuración del contenido */
+#mainContainer {
+    padding-top: 8vh;
+    padding-left: 41vw;
+}
+
 #body-background {
     background-color: #ffffff;
     height: 100% !important;
@@ -36,7 +66,7 @@ body {
 }
 
 #body-background {
-    background-image: url("https://intranet.nikken.com.mx:8064/images/bg-nikken.png");
+    background-image: url("../images/bg-nikken.png");
     background-repeat: no-repeat;
     background-position:bottom;
     background-size: 100vw 40vh;
@@ -82,7 +112,7 @@ body {
     bottom: 0px;
     left: 0px;
     opacity: 0.85;
-    background-image: url("https://intranet.nikken.com.mx:8064/images/bg-nikken.png");
+    background-image: url("../images/bg-nikken.png");
     background-repeat: no-repeat;
     background-position:bottom;
     background-size: 100vw 100vh;
@@ -105,8 +135,46 @@ body {
     -webkit-box-shadow: 10px 10px 3px #767879;
     -moz-box-shadow: 10px 10px 3px #767879;
 }
-
 /**********!SECTION Finaliza configuración login **********/
+
+/**********SECTION Inicia configuración navbar **********/
+#navbarMenu {
+    border-bottom: solid 8px #047c40;
+    vertical-align: middle;
+    background-color: #f2f2f2;
+}
+
+.navbar {
+    background-color: #f2f2f21a;
+    vertical-align: middle;
+    max-height: 6vh;
+    top: 0px !important;
+    padding-top: 0px !important;
+    text-transform: lowercase;
+}
+
+.nav-item,
+.nav-link {
+    color: #393737 !important;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+.navbar li > a:hover {
+    color: #393737 !important;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: bold;
+    background-color: #0887a061;
+    text-decoration: none;
+}
+
+.navbar-nav{
+    justify-content: center;
+ }
+/**********!SECTION Finaliza configuración navbar **********/
 
 /**********SECTION Inicia configuración sidebar **********/
 /*NOTE Fondo sidebar*/
@@ -116,25 +184,35 @@ body {
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+    border-radius:  8px #047c40;
 }
 
 .bg-sidebar::before {
     content: "";
-    background: url("/images/fondo_hojas.png");
-    opacity: 0.3;
+    opacity: 0.25;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
     z-index: -1;
-    background-color: #d2d2d2;
+    height: 100vh;
+    background-image: url("../images/sidebar.png");
+    background-repeat: round;
+    background-position-y: bottom;
+    background-position-x: center;
+    object-fit: contain;
+    background-color: #e1f7ce;
 }
 
 #sidebarMenu {
     position: fixed;
-    height: 100%;
-    padding-bottom: 20px;
+    height: 100vh;
+    max-width: 40vh;
+    top: 8vh;
+    left: 0.1vw;
+    border-radius: 5px;
+    overflow-x: auto;
 }
 
 /*NOTE Diseño del menú */
@@ -157,8 +235,6 @@ body {
     border: 1px solid #047c40;
     border-radius: 5px;
     background: #047c40;
-    opacity: 0.9;
-
 }
 
 .sidebar-submenu {
@@ -166,11 +242,8 @@ body {
     width: 100% !important;
     display: inline-block;
     padding: 5px 5px 5px 8px;
-    border: 1px solid #08a054;
-    border-radius: 5px;
-    background: #08a054;
-    opacity: 0.9;
     box-sizing: border-box;
+    background: #06ad59;
 }
 
 .sidebar a,
@@ -184,50 +257,15 @@ body {
     text-align: left;
 }
 
+.sidebar-header :hover,
 .sidebar-submenu :hover {
     text-decoration: none;
-    color: #bfcee2;
-    background: #047c40;
+    color: #047c40;
+    font-weight: bold;
+    background: #08eb79;
 }
 
 /**********!SECTION Finaliza configuración sidebar **********/
-
-/**********SECTION Inicia configuración navbar **********/
-.navbar {
-    background-color: #f2f2f2;
-    border-bottom: solid 8px #047c40;
-    justify-content: center;
-    vertical-align: middle;
-    height: 10vh;
-    top: 0px !important;
-    padding-top: 0px !important;
-    text-transform: lowercase;
-}
-
-.nav-item,
-.nav-link {
-    color: #393737 !important;
-    background-color: #f2f2f2;
-    font-size: 18px;
-    font-family: Montserrat;
-    font-weight: lighter;
-    text-decoration: none;
-}
-
-.navbar li > a:hover {
-    color: #393737 !important;
-    font-size: 18px;
-    font-family: Montserrat;
-    font-weight: bold;
-    background-color: #0887a061;
-    text-decoration: none;
-}
-
-.navbar-nav{
-    justify-content: center;
- }
-
-/**********!SECTION Finaliza configuración navbar **********/
 
 /**********SECTION Inicia configuración footer **********/
 .footer {
@@ -238,6 +276,7 @@ body {
     justify-content: center;
     bottom: 0px;
     position: fixed;
+    opacity: 0.8;
     background-color: #047c40;
     color: #bfcee2;
 }
@@ -246,196 +285,180 @@ body {
     content: "";
     left: 15rem;
     bottom: 200px;
-    /* opacity: 0.09; */
+    opacity: 0.8;
     background-color: #047c40;
 }
 
 /**********!SECTION Finaliza configuración footer **********/
 
-/**********SECTION Inicia configuración content-body **********/
-.content {
-    padding-bottom: 300px;
-    width: 100%;
-    height: 90vh !important;
-}
-
-/**********!SECTION Finaliza configuración content-body **********/
-.forms-Nikken{
+/**********SECTION Inicia diseño para los modales **********/
+/* NOTE Estilo para el modal de uploading */
+.charge {
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    z-index: 10500; /* Sit on top */
     display: none;
-    padding-bottom: 50px;
-}
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-x: hidden; /* Enable scroll if needed */
+    overflow-y: auto; /* Enable scroll if needed */
+    outline: 0;
+    background-color: rgb(115, 183, 208);
+    background-color: rgb(115, 183, 208, 0.45);
+  }
 
-.tittleSection {
-    position: sticky !important;
-    top: 66px;
-    z-index: 1020;
-}
-
-.findSection {
-    position: sticky !important;
-    top: 90px;
-    z-index: 1020;
-}
-
-.searchForm {
-    display: inline-block;
-}
-
-.table-tittle {
-    vertical-align: middle;
-    text-transform: uppercase;
-    vertical-align: top;
-    font-weight: bold;
-}
-
-.table-responsive {
-    height: 100% !important;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.table thead th {
-    vertical-align: middle;
-    text-transform: uppercase;
-    vertical-align: top;
-    color: #f2e9ee;
-    font-weight:normal;
-    text-align: left;
-    background: #00843D;
+  /* NOTE Modal guardar */
+.charge-content {
+    position: absolute;
     text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 30%;
+    margin: auto;
 }
 
-.table tfoot {
-    background-color: #00843D;
+/* NOTE Modal para errores */
+.error500 {
+    display: none;
+    z-index: 1050;
 }
 
-.table-secondary thead th {
-    vertical-align: middle;
-    text-transform: uppercase;
-    vertical-align: top;
-    font-size: 0.9rem;
-    color: #fff;
-    font-weight: normal;
-    text-align: left;
-    background: #6c757d;
-    text-align: center;
+/*NOTE Configuración de colores para los modales */
+.modal[data-modal-color="blue"] .modal-content {
+  background: #2196f3;
 }
 
-.table thead th input,
-.table tbody td input,
-.table thead th select,
-.table tbody td select {
+.modal[data-modal-color="lightblue"] .modal-content {
+  background: #03a9f4;
+}
+
+.modal[data-modal-color="cyan"] .modal-content {
+  background: #00bcd4;
+}
+
+.modal[data-modal-color="green"] .modal-content {
+  background: #4caf50;
+}
+
+.modal[data-modal-color="lightgreen"] .modal-content {
+  background: rgb(21, 220, 124);
+  background: rgb(21, 220, 124, 0.85);
+}
+
+.modal[data-modal-color="red"] .modal-content {
+  background: #f44336;
+}
+
+.modal[data-modal-color="amber"] .modal-content {
+  background: #ffc107;
+}
+
+.modal[data-modal-color="orange"] .modal-content {
+  background: #ff9800;
+}
+
+.modal[data-modal-color="teal"] .modal-content {
+  background: #009688;
+}
+
+.modal[data-modal-color="bluegray"] .modal-content {
+  background: #607d8b;
+}
+
+.modal[data-modal-color="gray"] .modal-content {
+  background: #a8bec9;
+}
+
+.modal[data-modal-color="bg-image-modal"] .modal-content {
     width: 100%;
-    padding: 0px;
     height: 100%;
+    background-image: linear-gradient(rgba(188, 244, 207, 0.3), rgba(152, 192, 166, 0.1)), url('../images/bg-nikken-modal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.table tbody tr:hover {
-    background-color: rgba(228, 210, 198, 0.45);
+.modal-backdrop { /* Cambiar color al degradado del modal */
+    background-color: rgba(25, 113, 10, 0.549) !important;
 }
 
-.table-bordered>thead>tr>th,
-.table-bordered>tbody>tr>td {
-    padding: 0;
+/*** NOTE Sección se estilos para los inputs de un formulario de modal ***/
+.modal-title {
+    color: #025c3b;
 }
 
-tr:first-child {
-    color: #295505;
+.modal-body label {
+    color: #025c3b;
 }
 
-td:hover {
-    font-weight: bold;
-    transition-delay: 0s;
-    transition-duration: 0.4s;
-    transition-property: all;
-    transition-timing-function: line;
-}
-
-.table tbody tr td {
-    vertical-align: middle;
-    padding: 5px;
-    background: #e2e6e4 transparent;
-}
-
-.table tbody td select {
+.modal-body input[type = text].lightgreen {
+    color: #025c3b;
     border: 1px solid #1c7052;
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(17, 158, 151, 0.5);
     padding: 5px;
 }
 
-.table tbody td select option{
-  	background-color: transparent !important;
+.modal-body input[type = text].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = email].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body input[type = email].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = password].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body input[type = password].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = date].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body select.lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body select.lightgreen option{
+    color: #025c3b;
 	border: 1px solid #e4e4e4;
-	color: #000;
+  	background-color: rgb(13, 199, 190);
 	-webkit-appearance: none;
      -moz-appearance: none;
 }
 
-.tableDetailBudget th {
-    padding: 0px !important;
-    vertical-align: middle !important;
-    text-transform: uppercase !important;
-    vertical-align: top !important;
-    font-size: 0.8rem !important;
-    color: #fff !important;
-    font-weight: normal !important;
-    text-align: left !important;
-    background: #6c757d !important;
-    text-align: center !important;
-}
-
-.tableDetailBudgetHeader th {
-    padding: 0px !important;
-    vertical-align: middle !important;
-    text-transform: uppercase !important;
-    vertical-align: top !important;
-    font-size: 0.8rem !important;
-    color: #deeced !important;
-    font-weight: normal !important;
-    text-align: left !important;
-    background: #057078 !important;
-    text-align: center !important;
-}
-
-.tableDetailBudget td {
-    font-size: 0.8rem !important;
-}
-
-/* NOTE  paginador*/
-.pagination  {
-    margin-bottom: 4px;
-}
-
-#paginate {
-    padding-bottom: 0px !important;
-    display: grid;
-}
-
-.page-item.active .page-link {
-    z-index: 0;
-    color: #fff;
-    background-color: #90BF7A;
-    border-color: #90BF7A;
-}
-
-.page-item {
-    z-index: 0;
-    color: #90BF7A;
-    background-color: #d1ecde;
-    border-color: #d1ecde;
-}
-
-.legendPaginate{
-    text-align: center !important;
-    align-items: center !important;
-    align-content: center !important;
-    margin: 0px !important;
-    color: #d1ecde !important;
-    font-weight: bold;
-    display: grid;
-    padding-bottom: 10px !important;
-}
-/**********!SECTION Finaliza diseño tablas editables **********/
+/**********!SECTION Finaliza diseño para los modales **********/
 
 /**********SECTION Inicia diseño botones de control fontawesome **********/
 .fontawesomePrimary {
@@ -532,251 +555,7 @@ td:hover {
     background: darken(#dca735, 10%);
 }
 /**********!SECTION Finaliza diseño botones de control fontawesome **********/
-
-/**********SECTION Inicia diseño para los modales **********/
-/* NOTE Estilo para el modal de uploading */
-.charge {
-    position: fixed; /* Stay in place */
-    top: 0;
-    left: 0;
-    z-index: 1060 !important; /* Sit on top */
-    display: none;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow-x: hidden; /* Enable scroll if needed */
-    overflow-y: auto; /* Enable scroll if needed */
-    outline: 0;
-    background-color: rgb(8, 160, 84);
-    background-color: rgb(8, 160, 84, 0.45);
-  }
-
-  /* NOTE Modal guardar */
-.charge-content {
-    position: absolute;
-    text-align: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 50%;
-    height: 30%;
-    margin: auto;
-    z-index: 1060 !important; /* Sit on top */
-}
-
-/* NOTE Modal para errores */
-.error500 {
-    display: none;
-    z-index: 1060;
-}
-
-/* NOTE estilo alert from modal */
-.currencyDetail,
-#errorModalSectionGlobal,
-#unknownModalErrorGlobal,
-#successModalSectionGlobal,
-#errorModalSection,
-#errorSpecificSection,
-#unknownModalError,
-#successModalSection,
-#errorDivAjaxSection,
-#unknownDivAjaxError,
-#successDivAjaxSection {
-    display: none;
-}
-
-/*NOTE Configuración de colores para los modales */
-.modal[data-modal-color="blue"] .modal-content {
-  background: #2196f3;
-}
-
-.modal[data-modal-color="lightblue"] .modal-content {
-  background: #03a9f4;
-}
-
-.modal[data-modal-color="cyan"] .modal-content {
-  background: #00bcd4;
-}
-
-.modal[data-modal-color="green"] .modal-content {
-  background: #4caf50;
-}
-
-.modal[data-modal-color="lightgreen"] .modal-content {
-  background: rgb(21, 220, 124);
-  /* background: rgb(21, 220, 124, 0.85); */
-}
-
-.modal[data-modal-color="red"] .modal-content {
-  background: #f44336;
-}
-
-.modal[data-modal-color="lightred"] .modal-content {
-    background: #eea09ade;
-  }
-
-.modal[data-modal-color="amber"] .modal-content {
-  background: #ffc107;
-}
-
-.modal[data-modal-color="orange"] .modal-content {
-  background: #ff9800;
-}
-
-.modal[data-modal-color="teal"] .modal-content {
-  background: #009688;
-}
-
-.modal[data-modal-color="bluegray"] .modal-content {
-  background: #607d8b;
-}
-
-.modal[data-modal-color="gray"] .modal-content {
-  background: #a8bec9;
-}
-
-.modal[data-modal-color="bg-image-modal"] .modal-content {
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(rgba(188, 244, 207, 0.3), rgba(152, 192, 166, 0.1)), url('../images/bg-nikken-modal.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.modal-backdrop { /* Cambiar color al degradado del modal */
-    background-color: rgb(8, 160, 84, 0.549) !important;
-}
-
-/*** NOTE Sección se estilos para los inputs de un formulario de modal ***/
-.modal-title {
-    color: #025c3b;
-}
-
-.modal-body label {
-    color: #025c3b;
-}
-
-.modal-body input[type = text].lightgreen {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-}
-
-.modal-body input[type = text].lightgreen:focus {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgb(13, 199, 190);
-    padding: 5px;
-}
-
-.modal-body input[type = email].lightgreen {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-}
-
-.modal-body input[type = email].lightgreen:focus {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgb(13, 199, 190);
-    padding: 5px;
-}
-
-.modal-body input[type = password].lightgreen {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-}
-
-.modal-body input[type = password].lightgreen:focus {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgb(13, 199, 190);
-    padding: 5px;
-}
-
-.modal-body input[type = date].lightgreen {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-}
-
-.modal-body select.lightgreen {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-}
-
-.modal-body select.lightgreen option{
-    color: #025c3b;
-	border: 1px solid #e4e4e4;
-  	background-color: rgb(13, 199, 190);
-	-webkit-appearance: none;
-     -moz-appearance: none;
-}
-
-/* .modal-body .input-group-text {
-    color: #025c3b;
-    border: 1px solid #1c7052;
-    background-color: rgba(17, 158, 151, 0.5);
-    padding: 5px;
-} */
-
-/* .modal-body input[type=checkbox].lightgreen {
-    position: relative;
-      cursor: pointer;
-}
-.modal-body input[type=checkbox].lightgreen:before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 0;
-    left: 0;
-    border: 2px solid #555555;
-    border-radius: 3px;
-    background-color: white;
-}
-.modal-body input[type=checkbox].lightgreen:checked:after {
-    content: "";
-    display: block;
-    width: 5px;
-    height: 10px;
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    position: absolute;
-    top: 2px;
-    left: 6px;
-} */
-/**********!SECTION Finaliza diseño para los modales **********/
-
 /**********SECTION Inicia estilos para formularios dinámicos **********/
-.tittle {
-    color: #56daa9;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.formGround {
-    background-color: rgba(96, 111, 104, 0.75)
-}
-.formWhiteGround {
-    background-color: #deefe6
-}
-
-.formInputRight {
-    text-align: right;
-}
-
 .file-drop-area {
     position: relative;
     display: flex;
@@ -890,14 +669,7 @@ td:hover {
     background-color:#f7c393;
     border-color: #f7c393;
 }
-
 /**********!SECTION Finaliza estilos para formularios dinámicos **********/
-
-/**********SECTION Inicia estilos para formularios por paso **********/
-#progressForm fieldset:not(:first-of-type) {
-    display: none;
-}
-/**********!SECTION Finaliza estilos para tooltips **********/
 /**********SECTION Inicia estilos para tooltips **********/
 .tooltip-inner {
     background-color: #d9ecdd;
@@ -916,560 +688,4 @@ td:hover {
 .tooltip.bs-tooltip-top .tooltip-arrow::before {
     border-top-color: #d9ecdd !important;
 }
-/**********!SECTION Finaliza estilos para formularios por paso **********/
-
-/**********SECTION Finaliza estilos personalizados bootstrap **********/
-.btn {
-    margin: 4px !important;
-    padding: 4px !important;
-}
-/**********!SECTION Finaliza estilos personalizados bootstrap **********/
-.table-fixed thead,
-.table-fixed tbody,
-.table-fixed tr,
-.table-fixed th,
-.table-fixed td { display: block; }
-
-.table-fixed tbody {
-    height: 50vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.table-fixed tbody td,
-.table-fixed thead th {
-    width: calc(100% / 5);
-    float: left;
-    display: block;
-}
-
-.table-fixed tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-.table-fixedByRequest thead,
-.table-fixedByRequest tbody,
-.table-fixedByRequest tr,
-.table-fixedByRequest th,
-.table-fixedByRequest td { display: block; }
-
-.table-fixedByRequest tbody {
-    height: 58vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-
-.table-fixedByRequest tbody td,
-.table-fixedByRequest thead th {
-    width: calc(100% / 6);
-    float: left;
-}
-
-.table-fixedByRequest tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-.table-fixedInvoiceItem thead,
-.table-fixedInvoiceItem tbody,
-.table-fixedInvoiceItem tr,
-.table-fixedInvoiceItem th,
-.table-fixedInvoiceItem td {
-    display: block;
-}
-
-.table-fixedInvoiceItem tbody {
-    height: auto !important;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-
-.table-fixedInvoiceItem tbody td,
-.table-fixedInvoiceItem thead th {
-    float: left;
-    border: none;
-}
-
-.table-fixedInvoiceItem tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-.invoiceItem {
-    font-weight: bold !important;
-    color: #85121f !important;
-    font-size: 15px !important;
-}
- .inputItemQuantity {
-    background-color: #fcfcfc7c !important;
-    border: 0.2px solid #fcfcfc7c;
-    text-align: center;
- }
-
-.postcard.light.red.active,
-.postcard.light.green.active,
-.postcard.light.blue.active,
-.postcard.light.yellow.active {
-    background: rgb(86,166,158);
-    background: linear-gradient(180deg, rgba(86,166,158,1) 0%, rgba(140,210,197,1) 39%, rgba(86,166,158,1) 68%);
-}
-
- /***SECTION -cardStyle ***/
- .dark {
-	 background: #110f16;
-}
- .light {
-	 background: #f3f5f7;
-}
- a, a:hover {
-	 text-decoration: none;
-	 transition: color 0.3s ease-in-out;
-}
- #pageHeaderTitle {
-	 margin: 2rem 0;
-	 text-transform: uppercase;
-	 text-align: center;
-	 font-size: 2.5rem;
-}
-/* Cards */
-.postcard {
-	flex-wrap: wrap;
-	display: flex;
-	box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
-	border-radius: 10px;
-	margin: 0 0 2rem 0;
-	overflow: hidden;
-	position: relative;
-	color: #fff;
-}
-
-.postcard.dark {
-	background-color: #18151f;
-}
-
-.postcard.light {
-	background-color: #e1e5ea;
-}
-
-.postcard .t-dark {
-	color: #18151f;
-}
-
-.postcard a {
-	color: inherit;
-}
-
-.postcard h1, .postcard .h1 {
-	margin-bottom: 0.5rem;
-	font-weight: 500;
-	line-height: 1.2;
-}
-
-.postcard .small {
-	font-size: 80%;
-}
-
-.postcard .postcard__title {
-	font-size: 1.75rem;
-    margin-left: 10px;
-}
-
-.postcard__subtitle {
-    margin-left: 10px;
-}
-
-.postcard .postcard__img {
-	max-height: 200px;
-	width: 100%;
-	object-fit: fill;
-	position: relative;
-    transform: scale(0.8);
-}
-.postcard .postcard__img_link {
-	display: contents;
-}
-.postcard .postcard__bar {
-	width: 50px;
-	height: 10px;
-	margin: 10px 0;
-	border-radius: 5px;
-	background-color: #424242;
-	transition: width 0.2s ease;
-}
-
-.postcard .postcard__text {
-	padding: 1.5rem;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-}
-
- .postcard .postcard__preview-txt {
-	 overflow: hidden;
-	 text-overflow: ellipsis;
-	 text-align: justify;
-	 height: 100%;
-}
-
-.postcard .postcard__tagbox {
-	display: flex;
-	flex-flow: row wrap;
-	font-size: 14px;
-	margin: 20px 0 0 0;
-	padding: 0;
-	justify-content: center;
-}
-
-.postcard .postcard__tagbox .tag__item {
-	display: inline-block;
-	background: rgba(83, 83, 83, 0.4);
-	border-radius: 3px;
-	padding: 2.5px 10px;
-	margin: 0 5px 5px 0;
-	cursor: default;
-	user-select: none;
-	transition: background-color 0.3s;
-}
-
-.postcard .postcard__tagbox .tag__item:hover {
-	background: rgba(83, 83, 83, 0.8);
-}
-
- .postcard:before {
-	 content: "";
-	 position: absolute;
-	 top: 0;
-	 right: 0;
-	 bottom: 0;
-	 left: 0;
-	 background-image: linear-gradient(-70deg, #424242, transparent 50%);
-	 opacity: 1;
-	 border-radius: 10px;
-}
-
-.postcard:hover .postcard__bar {
-	width: 100px;
-}
-
- @media screen and (min-width: 769px) {
-	 .postcard {
-		 flex-wrap: inherit;
-	}
-	 .postcard .postcard__title {
-		 font-size: 2rem;
-	}
-	 .postcard .postcard__tagbox {
-		 justify-content: start;
-	}
-	 .postcard .postcard__img {
-		 max-width: 180px;
-		 max-height: 100%;
-		 transition: transform 0.3s ease;
-	}
-	 .postcard .postcard__text {
-		 padding-left: 3rem;
-		 width: 100%;
-	}
-	 .postcard .media.postcard__text:before {
-		 content: "";
-		 position: absolute;
-		 display: block;
-		 background: #18151f;
-		 top: -20%;
-		 height: 130%;
-		 width: 55px;
-	}
-	 .postcard:hover .postcard__img {
-		 transform: scale(1.0);
-	}
-	/* .postcard:nth-child(2n+1) {
-		 flex-direction: row;
-	}
-	.postcard:nth-child(2n+0) {
-		 flex-direction: row-reverse;
-	} */
-	.postcard:nth-child(2n+1) .postcard__text::before {
-		left: -12px !important;
-		/* transform: rotate(4deg); */
-	}
-	.postcard:nth-child(2n+0) .postcard__text::before {
-		right: -12px !important;
-		/* transform: rotate(-4deg); */
-	}
-}
- @media screen and (min-width: 1024px) {
-	 .postcard__text {
-		 padding: 2rem 3.5rem;
-	}
-	 .postcard__text:before {
-		 content: "";
-		 position: absolute;
-		 display: block;
-		 top: -20%;
-		 height: 130%;
-		 width: 55px;
-	}
-	 .postcard.dark .postcard__text:before {
-		 background: #18151f;
-	}
-	 .postcard.light .postcard__text:before {
-		 background: #e1e5ea;
-	}
-}
-/* COLORS */
- .postcard .postcard__tagbox .green.play:hover {
-	 background: #79dd09;
-	 color: black;
-}
- .green .postcard__title:hover {
-	 color: #79dd09;
-}
- .green .postcard__bar {
-	 background-color: #79dd09;
-}
- .green::before {
-	 background-image: linear-gradient(-30deg, rgba(121, 221, 9, 0.1), transparent 50%);
-}
- .green:nth-child(2n)::before {
-	 background-image: linear-gradient(30deg, rgba(121, 221, 9, 0.1), transparent 50%);
-}
- .postcard .postcard__tagbox .blue.play:hover {
-	 background: #0076bd;
-}
- .blue .postcard__title:hover {
-	 color: #0076bd;
-}
- .blue .postcard__bar {
-	 background-color: #0076bd;
-}
- .blue::before {
-	 background-image: linear-gradient(-30deg, rgba(0, 118, 189, 0.1), transparent 50%);
-}
- .blue:nth-child(2n)::before {
-	 background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%);
-}
- .postcard .postcard__tagbox .red.play:hover {
-	 background: #bd150b;
-}
- .red .postcard__title:hover {
-	 color: #bd150b;
-}
- .red .postcard__bar {
-	 background-color: #bd150b;
-}
- .red::before {
-	 background-image: linear-gradient(-30deg, rgba(189, 21, 11, 0.1), transparent 50%);
-}
- .red:nth-child(2n)::before {
-	 background-image: linear-gradient(30deg, rgba(189, 21, 11, 0.1), transparent 50%);
-}
- .postcard .postcard__tagbox .yellow.play:hover {
-	 background: #bdbb49;
-	 color: black;
-}
- .yellow .postcard__title:hover {
-	 color: #bdbb49;
-}
- .yellow .postcard__bar {
-	 background-color: #bdbb49;
-}
- .yellow::before {
-	 background-image: linear-gradient(-30deg, rgba(189, 187, 73, 0.1), transparent 50%);
-}
- .yellow:nth-child(2n)::before {
-	 background-image: linear-gradient(30deg, rgba(189, 187, 73, 0.1), transparent 50%);
-}
- @media screen and (min-width: 769px) {
-	 .green::before {
-		 background-image: linear-gradient(-80deg, rgba(121, 221, 9, 0.1), transparent 50%);
-	}
-	 .green:nth-child(2n)::before {
-		 background-image: linear-gradient(80deg, rgba(121, 221, 9, 0.1), transparent 50%);
-	}
-	 .blue::before {
-		 background-image: linear-gradient(-80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-	}
-	 .blue:nth-child(2n)::before {
-		 background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-	}
-	 .red::before {
-		 background-image: linear-gradient(-80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-	}
-	 .red:nth-child(2n)::before {
-		 background-image: linear-gradient(80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-	}
-	 .yellow::before {
-		 background-image: linear-gradient(-80deg, rgba(189, 187, 73, 0.1), transparent 50%);
-	}
-	 .yellow:nth-child(2n)::before {
-		 background-image: linear-gradient(80deg, rgba(189, 187, 73, 0.1), transparent 50%);
-	}
-}
-
-.deliveryGround {
-    height: 460vh;
-    width: 100%;
-    display: block;
-    overflow-x: hidden;
-    overflow-y: auto;
-    align-items: center;
-    justify-content: center;
-    /* background: url("../images/deliveryBackground.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%; */
-}
-
-.lightGreenForm {
-    background-color: #86a6773a !important;
-}
-
-.lightBlueForm {
-    background-color: #77a69d34 !important;
-}
-
-.lightRedForm {
-    background-color: #8c3a6f23 !important;
-}
-
-.lightYellowForm {
-    background-color: #f2a0071a !important;
-}
-
-.responsiveImg {
-    width: 100%;
-    height: 10%;
-    max-width: 200px;
-    max-height: 180px;
-}
-
-.responsiveImgForm {
-    width: 100%;
-    height: 100%;
-    max-width: 200px;
-    max-height: 180px;
-}
-
-.responsiveTrackingImgForm {
-    width: 16px;
-    height: 16px;
-}
-
-.responsiveImgCarrousel {
-    width: 100%;
-    height: 100%;
-    max-width: 80px;
-    max-height: 180px;
-}
-
-.tooltipCustom {
-    border: 1px solid #777c81;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    display: none;
-    position: fixed;
-    width: 160px !important;
-    max-height: 15vh;
-    background-image: linear-gradient(rgba(188, 244, 207, 0.3), rgba(152, 192, 166, 0.1)), url('../images/bg-nikken-modal.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.textNotFind {
-    /* white-space: nowrap; */
-    text-decoration: line-through;
-    color:#511f1f;
-    writing-mode: vertical-lr;
-    -webkit-transform: rotate(-360deg);
-    -moz-transform: rotate(-360deg);
-}
-
-.theadRequest {
-    background-color: #5d1a1e !important;
-    font-size: 12px !important;
-    margin: 2px !important;
-    padding: 2px !important;
-    text-align:center !important;
-    color:#eee2e3 !important;
-    font-weight: bold !important;
-}
-
-.tbodyRequest {
-    text-align:center !important;
-    font-weight: bold !important;
-}
-
-/**** Estilo para borde animado ****/
-.draw {
-    overflow: hidden;
-    position: relative;
-}
-
-.draw::before,
-.draw::after {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    border: 4px solid transparent;
-    width: 0;
-    height: 0;
-}
-
-.draw::before {
-    top: 0;
-    left: 0;
-    border-top-color: #da9960;
-    border-right-color: #da9960;
-    animation: border 2s infinite;
-}
-
-.draw::after {
-    bottom: 0;
-    right: 0;
-    animation: border 2s 1s infinite, borderColor 2s 1s infinite;
-}
-
-@keyframes border {
-    0% {
-      width: 0;
-      height: 0;
-    }
-    25% {
-      width: 100%;
-      height: 0;
-    }
-    50% {
-      width: 100%;
-      height: 100%;
-    }
-    100% {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  @keyframes borderColor {
-    0% {
-      border-bottom-color: #da9960;
-      border-left-color: #da9960;
-    }
-    50% {
-      border-bottom-color: #da9960;
-      border-left-color: #da9960;
-    }
-    51% {
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-    }
-    100% {
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-    }
-  }
+/**********!SECTION Finaliza estilos para tooltips **********/

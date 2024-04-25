@@ -1,1 +1,1 @@
-Nikken © 2022 - Gestión presupuestal V.0
+Nikken © 2024 - Nombre Proyecto V.0
