@@ -1,0 +1,165 @@
+#impress {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.step {
+    /* width: 1000px;
+    height: 800px; */
+    position: relative;
+}
+
+.scheduleContainer {
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px;
+    border: solid 1px #666 !important;
+    border-radius: 10% !important;
+}
+
+.title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.node {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.role {
+    font-size: 1rem;
+    color: #666;
+}
+
+.step.active {
+    background-color: #e0e0e0;
+}
+
+/** Estilo organigrama **/
+:root {
+    --level-1: #8dccad;
+    --level-2: #f5cc7f;
+    --level-3: #7b9fe0;
+    --level-4: #f27c8d;
+    --black: black;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+    ol {
+    list-style: none;
+}
+    body {
+    margin: 50px 0 100px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+.organigramContainer {
+    width: 1000px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+.rectangle {
+    position: relative;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/** primer nivel **/
+.level-1 {
+    width: 50% !important;
+    margin: 0 auto 40px;
+    background: var(--level-1);
+}
+.level-1::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: var(--black);
+}
+/**Segundo nivel*/
+.level-2-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(20, 10fr);
+}
+.level-2-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 25%;
+    width: 50%;
+    max-width: 200%;
+    height: 2px;
+    background: var(--black);
+}
+.level-2-wrapper::after {
+    display: none;
+    content: "";
+    position: absolute;
+    left: -20px;
+    bottom: -20px;
+    width: 100%;
+    height: 2px;
+    background: var(--black);
+}
+.level-2-wrapper li {
+    position: relative;
+}
+.level-2-wrapper > li::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: var(--black);
+}
+.level-2 {
+    width: 70%;
+    margin: 0 auto 40px;
+    background: var(--level-2);
+}
+.level-2::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: var(--black);
+}
+.level-2::after {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-100%, -50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+}
