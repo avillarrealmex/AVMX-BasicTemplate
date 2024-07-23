@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'nikken_users',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'usuarios',
             'hash' => false,
         ],
     ],
@@ -70,11 +70,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'nikken_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users::class,
+        ],
     ],
 
     /*

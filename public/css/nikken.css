@@ -1,0 +1,691 @@
+/**********SECTION Inicia configuración scrollbar css **********/
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #77a054 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #77a054;
+    border-radius: 10px;
+    border: 3px ridge #36543f;
+  }
+/**********!SECTION Finaliza configuración scrollbar css **********/
+
+/**********SECTION Inicia configuración general del sitio **********/
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/montserrat/static/Montserrat-Regular.ttf);
+}
+
+body {
+    font-family: Montserrat !important;
+}
+
+/* Posicionamiento logo */
+.divLogoNikken {
+    width: inherit !important;
+    height: 6vh;
+    align-items: center !important;
+    align-content: center !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.logoNikken {
+    opacity: 0.9;
+    width: 8vw;
+    height: 8vh;
+    padding: 0px;
+}
+
+.btnSidebar {
+    position: inherit;
+    padding-left: 9vw;
+}
+
+/* Configuración del contenido */
+#mainContainer {
+    padding-top: 8vh;
+    padding-left: 41vw;
+}
+
+#body-background {
+    background-color: #ffffff;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+#body-background {
+    background-image: url("../images/bg-nikken.png");
+    background-repeat: no-repeat;
+    background-position:bottom;
+    background-size: 100vw 40vh;
+    object-fit: contain;
+}
+
+.mt-4 {
+    color: #034b1e;
+    font-family: Montserrat;
+    font-weight: bold;
+}
+
+.float-left {
+    float: left !important;
+    text-align: left;
+}
+
+.float-right {
+    float: right !important;
+    text-align: right;
+}
+
+.formTittle {
+    color: rgb(6, 27, 12);
+}
+
+/**********!SECTION Finaliza configuración general del sitio **********/
+
+/**********SECTION Inicia configuración login **********/
+.background {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.85;
+    background-image: url("../images/bg-nikken.png");
+    background-repeat: no-repeat;
+    background-position:bottom;
+    background-size: 100vw 100vh;
+    object-fit: contain;
+}
+
+/*NOTE Centrado del login */
+.login-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.fondo-logo-sombra {
+    padding: 10px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    box-shadow: 10px 10px 3px #767879;
+    -webkit-box-shadow: 10px 10px 3px #767879;
+    -moz-box-shadow: 10px 10px 3px #767879;
+}
+/**********!SECTION Finaliza configuración login **********/
+
+/**********SECTION Inicia configuración navbar **********/
+#navbarMenu {
+    border-bottom: solid 8px #047c40;
+    vertical-align: middle;
+    background-color: #f2f2f2;
+}
+
+.navbar {
+    background-color: #f2f2f21a;
+    vertical-align: middle;
+    max-height: 6vh;
+    top: 0px !important;
+    padding-top: 0px !important;
+    text-transform: lowercase;
+}
+
+.nav-item,
+.nav-link {
+    color: #393737 !important;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+.navbar li > a:hover {
+    color: #393737 !important;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: bold;
+    background-color: #0887a061;
+    text-decoration: none;
+}
+
+.navbar-nav{
+    justify-content: center;
+ }
+/**********!SECTION Finaliza configuración navbar **********/
+
+/**********SECTION Inicia configuración sidebar **********/
+/*NOTE Fondo sidebar*/
+.bg-sidebar {
+    height: 100vh;
+    display: block;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius:  8px #047c40;
+}
+
+.bg-sidebar::before {
+    content: "";
+    opacity: 0.25;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    background-image: url("../images/sidebar.png");
+    background-repeat: round;
+    background-position-y: bottom;
+    background-position-x: center;
+    object-fit: contain;
+    background-color: #cee7f7;
+}
+
+#sidebarMenu {
+    position: fixed;
+    height: 100vh;
+    max-width: 40vh;
+    top: 8vh;
+    left: 0.1vw;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/*NOTE Diseño del menú */
+.sidebar {
+    text-align: left;
+    top: 50px;
+}
+
+.sidebar ul {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.sidebar-header {
+    list-style-type: none;
+    width: 100% !important;
+    display: inline;
+    padding: 5px 5px 5px 8px;
+    border: 1px solid #047c40;
+    border-radius: 5px;
+    background: #047c40;
+}
+
+.sidebar-submenu {
+    list-style-type: none;
+    width: 100% !important;
+    display: inline-block;
+    padding: 5px 5px 5px 8px;
+    box-sizing: border-box;
+    background: #06ad59;
+}
+
+.sidebar a,
+.sidebar-header a,
+.sidebar-submenu a
+{
+    text-decoration: none;
+    color: #bfcee2;
+    width: 100% !important;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar-header :hover,
+.sidebar-submenu :hover {
+    text-decoration: none;
+    color: #047c40;
+    font-weight: bold;
+    background: #08eb79;
+}
+
+/**********!SECTION Finaliza configuración sidebar **********/
+
+/**********SECTION Inicia configuración footer **********/
+.footer {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0px;
+    position: fixed;
+    opacity: 0.8;
+    background-color: #047c40;
+    color: #bfcee2;
+}
+
+.footer::before {
+    content: "";
+    left: 15rem;
+    bottom: 200px;
+    opacity: 0.8;
+    background-color: #047c40;
+}
+
+/**********!SECTION Finaliza configuración footer **********/
+
+/**********SECTION Inicia diseño para los modales **********/
+/* NOTE Estilo para el modal de uploading */
+.charge {
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    z-index: 10500; /* Sit on top */
+    display: none;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-x: hidden; /* Enable scroll if needed */
+    overflow-y: auto; /* Enable scroll if needed */
+    outline: 0;
+    background-color: rgb(115, 183, 208);
+    background-color: rgb(115, 183, 208, 0.45);
+  }
+
+  /* NOTE Modal guardar */
+.charge-content {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 30%;
+    margin: auto;
+}
+
+/* NOTE Modal para errores */
+.error500 {
+    display: none;
+    z-index: 1050;
+}
+
+/*NOTE Configuración de colores para los modales */
+.modal[data-modal-color="blue"] .modal-content {
+  background: #2196f3;
+}
+
+.modal[data-modal-color="lightblue"] .modal-content {
+  background: #03a9f4;
+}
+
+.modal[data-modal-color="cyan"] .modal-content {
+  background: #00bcd4;
+}
+
+.modal[data-modal-color="green"] .modal-content {
+  background: #4caf50;
+}
+
+.modal[data-modal-color="lightgreen"] .modal-content {
+  background: rgb(21, 220, 124);
+  background: rgb(21, 220, 124, 0.85);
+}
+
+.modal[data-modal-color="red"] .modal-content {
+  background: #f44336;
+}
+
+.modal[data-modal-color="amber"] .modal-content {
+  background: #ffc107;
+}
+
+.modal[data-modal-color="orange"] .modal-content {
+  background: #ff9800;
+}
+
+.modal[data-modal-color="teal"] .modal-content {
+  background: #009688;
+}
+
+.modal[data-modal-color="bluegray"] .modal-content {
+  background: #607d8b;
+}
+
+.modal[data-modal-color="gray"] .modal-content {
+  background: #a8bec9;
+}
+
+.modal[data-modal-color="bg-image-modal"] .modal-content {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(188, 244, 207, 0.3), rgba(152, 192, 166, 0.1)), url('../images/bg-nikken-modal.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modal-backdrop { /* Cambiar color al degradado del modal */
+    background-color: rgba(25, 113, 10, 0.549) !important;
+}
+
+/*** NOTE Sección se estilos para los inputs de un formulario de modal ***/
+.modal-title {
+    color: #025c3b;
+}
+
+.modal-body label {
+    color: #025c3b;
+}
+
+.modal-body input[type = text].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body input[type = text].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = email].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body input[type = email].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = password].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body input[type = password].lightgreen:focus {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgb(13, 199, 190);
+    padding: 5px;
+}
+
+.modal-body input[type = date].lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body select.lightgreen {
+    color: #025c3b;
+    border: 1px solid #1c7052;
+    background-color: rgba(17, 158, 151, 0.5);
+    padding: 5px;
+}
+
+.modal-body select.lightgreen option{
+    color: #025c3b;
+	border: 1px solid #e4e4e4;
+  	background-color: rgb(13, 199, 190);
+	-webkit-appearance: none;
+     -moz-appearance: none;
+}
+
+/**********!SECTION Finaliza diseño para los modales **********/
+
+/**********SECTION Inicia diseño botones de control fontawesome **********/
+.fontawesomePrimary {
+    background: #0d6efd;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomePrimary :hover {
+    background: darken(#0d6efd);
+}
+
+
+.fontawesomeSecondary {
+    background: #898d8d;
+    color: #e4f3e7;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeSecondary :hover {
+    background: darken(#898d8d, 10%);
+    color: #e4f3e7 !important;
+
+}
+
+.fontawesomeEdit {
+    background: #08a054;
+    color: #e4f3e7;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeEdit :hover {
+    background: darken(#08a054, 10%);
+}
+
+.fontawesomeAddRegister {
+    background: #045da5;
+    color: #e4f3e7;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeAddRegister :hover {
+    background: darken(#045da5, 10%);
+}
+
+.fontawesomeCoins {
+    background: #fafaaf;
+    color: #ffc107;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeCoins :hover {
+    background: darken(#f6f67b, 10%);
+}
+
+.fontawesomeDanger {
+    background: #dc3545;
+    color: #e4f3e7;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeDanger :hover {
+    background: darken(#dc3545, 10%);
+}
+
+.fontawesomeWarning {
+    background: #dca735;
+    color: #e4f3e7;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.fontawesomeWarning :hover {
+    background: darken(#dca735, 10%);
+}
+/**********!SECTION Finaliza diseño botones de control fontawesome **********/
+/**********SECTION Inicia estilos para formularios dinámicos **********/
+.file-drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    max-width: 100%;
+    height: 100px;
+    padding: 5px;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.choose-file-button {
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin-right: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px dashed rgb(4, 110, 33);
+    height: 10vh;
+    width: 30%;
+    display: grid;
+    align-items: center;
+}
+
+.file-message {
+    font-size: small;
+    font-weight: 100;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 10vh;
+    width: 70%;
+    border: 1px dashed rgb(4, 110, 33);
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.input-select {
+    background-color: white;
+    color: #898D8D;
+    padding: 0px;
+    border: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.showEvidenceArea {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: small;
+    font-weight: 100;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 14vh;
+    width: 100%;
+    overflow-y: auto;
+    border: 1px dashed rgb(4, 110, 33);
+}
+
+.bg-lightError{
+    color:#00843D !important;
+    font-weight: bold;
+    background-color:#f3ef2e !important;
+    border-color: #eeeb4d !important;
+    border: 4px outset;
+}
+.bg-lightAlert{
+    color:#00843D;
+    font-weight: bold;
+    background-color:#f8d7da;
+    border-color: #f5c2c7;
+}
+
+.span-lightAlert {
+    text-align: left !important;
+    display: block;
+    color:#4c2226;
+    font-weight: bold;
+    background-color:#f8d7da;
+    border-color: #f5c2c7;
+    font-size: 10px;
+    margin: 3px !important;
+    padding: 3px !important
+}
+
+.bg-lightExist{
+    color:#107713ae;
+    font-weight: bold;
+    background-color:#f7c393;
+    border-color: #f7c393;
+}
+/**********!SECTION Finaliza estilos para formularios dinámicos **********/
+/**********SECTION Inicia estilos para tooltips **********/
+.tooltip-inner {
+    background-color: #d9ecdd;
+    box-shadow: 0px 0px 4px black;
+    opacity: 1.9 !important;
+}
+.tooltip.bs-tooltip-right .tooltip-arrow::before {
+    border-right-color: #d9ecdd !important;
+}
+.tooltip.bs-tooltip-left .tooltip-arrow::before {
+    border-left-color: #d9ecdd !important;
+}
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #d9ecdd !important;
+}
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #d9ecdd !important;
+}
+/**********!SECTION Finaliza estilos para tooltips **********/
